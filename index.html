@@ -6,39 +6,119 @@
   <title>Estudio Jurídico - Atención profesional</title>
   <meta name="description" content="Estudio jurídico. Consultas online, turnos y pagos digitales. Atención en causas civiles, penales y laborales.">
   <style>
-    :root{--accent:#0b5cff;--dark:#0b1b2b;--muted:#6b7280;--card-bg:#ffffff;--radius:12px;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color-scheme:light}
+    :root{
+      --accent:#0b5cff;
+      --dark:#0b1b2b;
+      --muted:#6b7280;
+      --card-bg:#ffffff;
+      --radius:12px;
+      --max-width:1100px;
+      --gap:16px;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    /* Reset / base */
     *{box-sizing:border-box}
-    body{margin:0;background:#f6f8fb;color:var(--dark);line-height:1.45}
-    header{background:linear-gradient(90deg,var(--accent),#2b6ef6);color:white;padding:18px 20px}
-    .container{max-width:1100px;margin:0 auto;padding:20px}
-    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    html,body{height:100%}
+    body{margin:0;background:#f6f8fb;color:var(--dark);line-height:1.45;-webkit-font-smoothing:antialiased}
+
+    .container{max-width:var(--max-width);margin:0 auto;padding:20px}
+
+    /* Header / topbar */
+    header{background:linear-gradient(90deg,var(--accent),#2b6ef6);color:#fff}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;position:relative}
     .brand{display:flex;align-items:center;gap:12px}
-    .brand h1{font-size:18px;margin:0}
-    nav{display:flex;gap:16px}
-    nav a{color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600}
-    .cta{background:white;color:var(--accent);padding:8px 12px;border-radius:10px;font-weight:700}
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:34px 0}
+    .brand h1{font-size:18px;margin:0;line-height:1}
+    .brand .tag{font-size:12px;color:rgba(255,255,255,0.9)}
+
+    /* Navigation */
+    .menu-toggle{display:none;background:transparent;border:0;color:#fff;font-size:26px;cursor:pointer;padding:6px}
+    nav#menu{display:flex;gap:12px;align-items:center}
+    nav#menu a{color:#fff;text-decoration:none;font-weight:600;padding:6px 8px;border-radius:8px}
+    nav#menu a.cta{background:#fff;color:var(--accent);padding:8px 12px;font-weight:700}
+
+    /* Mobile nav (hidden by default) */
+    nav#menu.mobile{display:none;position:absolute;top:64px;right:20px;background:linear-gradient(90deg,var(--accent),#2b6ef6);padding:12px;border-radius:10px;box-shadow:0 8px 24px rgba(11,92,255,0.15);flex-direction:column;min-width:200px;z-index:100}
+    nav#menu.mobile a{display:block;padding:10px;color:#fff}
+    nav#menu.show.mobile{display:flex}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start;padding:34px 0}
     .hero h2{font-size:28px;margin:0 0 10px}
     .hero p{margin:0 0 18px;color:var(--muted)}
+
     .card{background:var(--card-bg);border-radius:var(--radius);padding:18px;box-shadow:0 6px 18px rgba(20,30,60,0.06)}
+
+    /* Services and lawyers*/
     .services{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
     .service h3{margin:0 0 8px}
     .service p{margin:0;color:var(--muted)}
-    form .row{display:flex;gap:12px}
-    label{display:block;font-size:13px;margin-bottom:6px}
-    input[type=text],input[type=email],select,textarea{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px;font-size:14px}
-    textarea{min-height:120px;resize:vertical}
-    button{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
-    footer{padding:30px 0;color:var(--muted)}
-    @media (max-width: 900px){.hero{grid-template-columns:1fr}.services{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:600px){nav{display:none}.menu-toggle{display:inline-block}.services{grid-template-columns:1fr}.topbar{gap:8px}.brand h1{font-size:16px}}
-    .muted{color:var(--muted)}.flex{display:flex;align-items:center}.stack{display:flex;flex-direction:column;gap:8px}.pill{background:#f0f4ff;padding:6px 10px;border-radius:999px;color:#06316a;font-weight:700}
-    /* Abogados */
+
     .lawyers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
     .lawyer .avatar{width:100%;height:180px;object-fit:cover;border-radius:10px}
     .lawyer h4{margin:10px 0 4px}
+    .muted{color:var(--muted)}
     .price{font-weight:800}
-    @media(max-width:800px){.lawyers{grid-template-columns:1fr}}
+
+    /* Form styling */
+    .form-grid{display:grid;grid-template-columns:1fr 220px;gap:12px}
+    form .row{display:flex;gap:12px;flex-wrap:wrap}
+    label{display:block;font-size:13px;margin-bottom:6px}
+    input[type=text],input[type=email],select,textarea{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px;font-size:14px;min-height:44px}
+    textarea{min-height:120px;resize:vertical}
+
+    /* Buttons */
+    .btn{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;display:inline-block}
+    .btn:active{transform:translateY(1px)}
+    .btn.full{width:100%}
+
+    .pill{background:#f0f4ff;padding:6px 10px;border-radius:999px;color:#06316a;font-weight:700}
+
+    /* Payments */
+    .pay-btn{display:inline-block;padding:12px 20px;border-radius:10px;font-weight:700;text-decoration:none;text-align:center;min-width:200px}
+    .pay-btn.paypal{background:#ffc439;color:#111}
+    .pay-btn.paypal:hover{background:#e0ac25}
+
+    /* Footer */
+    footer{padding:30px 0;color:var(--muted)}
+
+    /* Small screen adjustments */
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .services{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media (max-width: 800px){
+      .lawyers{grid-template-columns:1fr}
+      nav#menu a{white-space:nowrap}
+    }
+
+    @media (max-width:700px){
+      .menu-toggle{display:block}
+      /* switch menu into mobile mode */
+      nav#menu{display:none}
+      nav#menu.mobile{display:none}
+      nav#menu.show{display:flex}
+      nav#menu.show{position:absolute;top:64px;right:20px;background:linear-gradient(90deg,var(--accent),#2b6ef6);padding:12px;border-radius:10px;box-shadow:0 8px 24px rgba(11,92,255,0.15);flex-direction:column;min-width:200px;z-index:100}
+      nav#menu.show a{display:block;padding:10px;color:#fff}
+    }
+
+    @media (max-width:600px){
+      .brand h1{font-size:16px}
+      .services{grid-template-columns:1fr}
+      .hero{gap:18px}
+      .form-grid{grid-template-columns:1fr}
+      .pay-btn{min-width:unset;width:100%}
+      .btn.full-mobile{width:100%}
+    }
+
+    /* Small aesthetic helpers */
+    .stack{display:flex;flex-direction:column;gap:8px}
+    .flex{display:flex;align-items:center}
+
+    /* Accessibility: focus outlines */
+    a:focus, button:focus, input:focus, textarea:focus{outline:3px solid rgba(11,92,255,0.18);outline-offset:2px}
+
   </style>
 </head>
 <body>
@@ -50,20 +130,20 @@
           <path d="M6 18V12l6-6 6 6v6" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
         <div>
-          <h1>Estudio Jurídico Aquino & Asociados</h1>
-          <div style="font-size:12px;color:rgba(255,255,255,0.9)">Especialistas en civil, penal, laborales y migraciones</div>
+          <h1>Estudio Jurídico Aquino &amp; Asociados</h1>
+          <div class="tag">Especialistas en civil, penal, laboral y migraciones</div>
         </div>
       </div>
 
-      <nav aria-label="Menú principal">
+      <button class="menu-toggle" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">☰</button>
+
+      <nav id="menu" aria-label="Menú principal">
         <a href="#servicios">Servicios</a>
         <a href="#abogados">Abogados</a>
         <a href="#consultas">Consultas</a>
         <a href="#pagos">Pagos</a>
         <a href="#contacto" class="cta">Contacto</a>
       </nav>
-
-      <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" style="display:none;background:transparent;border:none;color:white;font-weight:700">☰</button>
     </div>
   </header>
 
@@ -71,7 +151,7 @@
     <section class="hero">
       <div>
         <h2>Asesoría legal profesional — rápida y confiable</h2>
-        <p>Brindamos asesoramiento desde la primera consulta por video-llamada, seguimiento del caso y representación. Agenda una consulta online y paga con MercadoPago, PayPal o tarjeta.</p>
+        <p>Brindamos asesoramiento desde la primera consulta online, seguimiento del caso y representación. Agenda una consulta y pagá con MercadoPago, PayPal o tarjeta.</p>
 
         <div class="card">
           <div class="stack">
@@ -83,9 +163,8 @@
               <div class="pill">Reserva y pago online</div>
             </div>
 
-            <div style="display:flex;gap:10px;margin-top:10px">
-              <div style="margin-top:10px"><a href="#abogados"><button>Pedir consulta</button></a></div>
-              
+            <div style="margin-top:12px">
+              <button class="btn full-mobile" onclick="document.getElementById('abogados').scrollIntoView({behavior:'smooth'});">Pedir consulta</button>
             </div>
           </div>
         </div>
@@ -114,164 +193,109 @@
     <section id="abogados">
       <h3>Equipo de abogados</h3>
       <div class="lawyers">
-        <div class="card lawyer">
-          <img class="avatar" src="img/avatarmujer2.png" alt="Abogada Jubilaciones">
+
+        <div class="card lawyer" data-area="Jubilaciones y Aportes Previsionales">
+          <img class="avatar" loading="lazy" src="/img/pngtree-female-lawyer-professional-worker-avatar-png-image_15552148.png" alt="Dra. Flavia Singh">
           <h4>Dra. Flavia Singh</h4>
           <div class="muted">MP 12345657</div>
-          <div class="muted">Especialista en jubilaciones y aportes previsionales</div>
+          <div class="muted specialty">Especialista en jubilaciones y aportes previsionales</div>
           <p style="margin-top:10px">Asesoramiento en trámites previsionales, recursos administrativos y juicios previsionales.</p>
           <div style="margin-top:10px"><span class="price">Precio consulta: $4.500</span></div>
-          <div style="margin-top:10px"><a href="#consultas"><button>Pedir consulta</button></a></div>
+          <div style="margin-top:12px"><button type="button" class="btn consult-btn" aria-label="Pedir consulta Dra. Flavia Singh">Pedir consulta</button></div>
         </div>
 
-        <div class="card lawyer">
-          <img class="avatar" src="img/avatarmujer1.jpg" alt="Abogada Migraciones">
+        <div class="card lawyer" data-area="Migraciones">
+          <img class="avatar" loading="lazy" src="/img/mujer-confiada-rompe-barrera_1308-176959.jpg" alt="Lic. Liliana Aquino">
           <h4>Lic. Liliana Aquino</h4>
           <div class="muted">MP 12343543</div>
-          <div class="muted">Especialista en migraciones</div>
+          <div class="muted specialty">Especialista en migraciones</div>
           <p style="margin-top:10px">Visas, residencia, apelaciones migratorias y asesoramiento a empresas.</p>
           <div style="margin-top:10px"><span class="price">Precio consulta: $6.000</span></div>
-          <div style="margin-top:10px"><a href="#consultas"><button>Pedir consulta</button></a></div>
+          <div style="margin-top:12px"><button type="button" class="btn consult-btn" aria-label="Pedir consulta Lic. Liliana Aquino">Pedir consulta</button></div>
         </div>
 
-        <div class="card lawyer">
-          <img class="avatar" src="img/avatarhombre.jpg" alt="Abogado Laboral">
+        <div class="card lawyer" data-area="Derecho Laboral">
+          <img class="avatar" loading="lazy" src="/img/imagen-perfil-avatar-hombre-aislada-fondo-imagen-profil-avatar-hombre_1293239-4870.jpg" alt="Dr. Martín López">
           <h4>Dr. Martín López</h4>
           <div class="muted">MP 3455465657567</div>
-          <div class="muted">Especialista en derecho laboral</div>
+          <div class="muted specialty">Especialista en derecho laboral</div>
           <p style="margin-top:10px">Despidos, demandas laborales, negociación y representación en juzgados.</p>
           <div style="margin-top:10px"><span class="price">Precio consulta: $5.500</span></div>
-          <div style="margin-top:10px"><a href="#consultas"><button>Pedir consulta</button></a></div>
+          <div style="margin-top:12px"><button type="button" class="btn consult-btn" aria-label="Pedir consulta Dr. Martín López">Pedir consulta</button></div>
         </div>
+
       </div>
     </section>
 
     <section id="consultas">
-  <h3>Solicitar consulta</h3>
-  <div class="card">
-    <!-- FORMULARIO LISTO PARA FORMSubmit -->
-    <form action="https://formsubmit.co/inversionesenpandemia@gmail.com" method="POST">
-      
-      <!-- Campos ocultos de configuración -->
-      <input type="hidden" name="_next" value="https://inversionesenpandemia.github.io/EstudioJuridico/"> <!-- URL donde redirigir tras enviar -->
-      <input type="hidden" name="_subject" value="Nueva consulta desde la web">
-      <input type="hidden" name="_captcha" value="false"> <!-- Opcional: desactiva captcha -->
-      <input type="hidden" name="_template" value="table"> <!-- Opcional: formato del correo -->
+      <h3>Solicitar consulta</h3>
+      <div class="card">
+        <!-- FORMULARIO LISTO PARA FORMSubmit -->
+        <form action="https://formsubmit.co/inversionesenpandemia@gmail.com" method="POST">
+          <input type="hidden" name="_next" value="https://inversionesenpandemia.github.io/EstudioJuridico/">
+          <input type="hidden" name="_subject" value="Nueva consulta desde la web">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
 
-      <div class="row">
-        <div style="flex:1">
-          <label for="name">Nombre completo</label>
-          <input id="name" name="name" type="text" required>
+          <div class="form-grid">
+            <div>
+              <label for="name">Nombre completo</label>
+              <input id="name" name="name" type="text" required autocomplete="name">
+            </div>
+            <div>
+              <label for="phone">Teléfono</label>
+              <input id="phone" name="phone" type="text" inputmode="tel" autocomplete="tel">
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required autocomplete="email">
+          </div>
+
+          <!-- Área de derecho (rellena automáticamente según el abogado que haga click) -->
+          <div style="margin-top:12px">
+            <label for="area">Área</label>
+            <input id="area" name="area" type="text" readonly placeholder="Se completará al elegir abogado">
+          </div>
+
+          <div style="margin-top:12px">
+            <label for="message">Resumen del caso (máx. 1200 caracteres)</label>
+            <textarea id="message" name="message" maxlength="1200"></textarea>
+          </div>
+
+          <div style="margin-top:12px">
+            <button type="submit" class="btn full">Enviar consulta</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="pagos" style="margin-top:24px">
+      <h3>Métodos de pago</h3>
+      <div class="card">
+        <p class="muted">Elegí tu método de pago. Una vez realizado, podrás enviar tu consulta y recibirás el enlace de Zoom por correo.</p>
+
+        <div style="display:flex;gap:16px;margin-top:18px;flex-wrap:wrap;align-items:center">
+
+          <!-- BOTÓN MERCADO PAGO -->
+          <div>
+            <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+              data-preference-id="255770860-77eabc4f-e9b5-49fb-9ffa-60f88b3e0e67"
+              data-source="button">
+            </script>
+          </div>
+
+          <!-- BOTÓN PAYPAL -->
+          <a href="https://paypal.me/invenpan" class="pay-btn paypal" target="_blank" rel="noopener noreferrer">🅿️ Pagar con PayPal</a>
         </div>
-        <div style="width:220px">
-          <label for="phone">Teléfono</label>
-          <input id="phone" name="phone" type="text">
+
+        <div style="margin-top:12px;font-size:13px;color:var(--muted)">
+          Una vez confirmado el pago, podrás enviar tu consulta desde el formulario.
         </div>
       </div>
+    </section>
 
-      <div style="margin-top:12px">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required>
-      </div>
-
-      <!-- Área de derecho (rellena automáticamente según el abogado que haga click) -->
-      <div style="margin-top:12px">
-        <label for="area">Área</label>
-        <input id="area" name="area" type="text" readonly placeholder="Se completará al elegir abogado">
-      </div>
-
-      <div style="margin-top:12px">
-        <label for="message">Resumen del caso (máx. 1200 caracteres)</label>
-        <textarea id="message" name="message" maxlength="1200"></textarea>
-      </div>
-
-      <div style="margin-top:12px">
-        <button type="submit">Enviar consulta</button>
-      </div>
-    </form>
-  </div>
-</section>
-
-<script>
-  // --- JS para completar automáticamente el área del abogado seleccionado ---
-  document.querySelectorAll('.lawyer button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const areaInput = document.getElementById('area');
-      const lawyerCard = btn.closest('.lawyer');
-      const specialty = lawyerCard.querySelector('.muted:nth-child(4)').innerText; // segunda línea muted (especialidad)
-      areaInput.value = specialty;
-    });
-  });
-</script>
-
-
- <section id="pagos" style="margin-top:24px">
-  <h3>Métodos de pago</h3>
-  <div class="card">
-    <p class="muted">Elegí tu método de pago. Una vez realizado, podrás enviar tu consulta y recibirás el enlace de Zoom por correo.</p>
-
-    <div style="display:flex;gap:16px;margin-top:18px;flex-wrap:wrap;align-items:center">
-
-      <!-- BOTÓN MERCADO PAGO -->
-      <div>
-        <p class="muted">Mercado Pago</p>
-        <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
-          data-preference-id="255770860-77eabc4f-e9b5-49fb-9ffa-60f88b3e0e67"
-          data-source="button">
-        </script>
-      </div>
-
-      <!-- BOTÓN PAYPAL -->
-      <a href="https://paypal.me/invenpan" 
-         class="pay-btn paypal" target="_blank">🅿️ Pagar con PayPal</a>
-    </div>
-
-    <div style="margin-top:12px;font-size:13px;color:var(--muted)">
-      Una vez confirmado el pago, podrás enviar tu consulta desde el formulario.
-    </div>
-  </div>
-</section>
-<style>
-  .pay-btn {
-    display:inline-block;
-    padding:12px 20px;
-    border-radius:10px;
-    font-weight:700;
-    text-decoration:none;
-    text-align:center;
-    min-width:200px;
-  }
-  .pay-btn.paypal {
-    background:#ffc439;
-    color:#111;
-  }
-  .pay-btn.paypal:hover { background:#e0ac25; }
-</style>
-
-<script>
-  // Simular que tras volver del pago se muestra el formulario
-  // Podés hacer que MercadoPago/PayPal redirijan a tu sitio con ?pago=ok
-  document.addEventListener("DOMContentLoaded", function(){
-    const params = new URLSearchParams(window.location.search);
-    if(params.get("pago") === "ok"){
-      document.getElementById("post-payment").style.display = "block";
-      window.scrollTo({ top: document.getElementById("post-payment").offsetTop, behavior: 'smooth' });
-    }
-  });
-
-  // Enviar consulta por AJAX
-  document.getElementById("post-payment-form").addEventListener("submit", function(e){
-    e.preventDefault();
-    var form = this;
-    fetch(form.action, {
-      method: "POST",
-      body: new FormData(form)
-    }).then(r=>r.text()).then(resp=>{
-      document.getElementById("pp-msg").style.display = "block";
-      form.reset();
-    }).catch(err=>alert("Error al enviar la consulta"));
-  });
-</script>
     <section id="contacto" style="margin-top:28px">
       <h3>Ubicación y contacto</h3>
       <div class="card">
@@ -279,16 +303,62 @@
         <p class="muted">Síguenos: Facebook · LinkedIn</p>
       </div>
     </section>
+
   </main>
 
   <footer>
-    <div class="container">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
-        <div class="muted">© <span id="year"></span> Estudio Jurídico Aquino & Asociados — Todos los derechos reservados</div>
-        <div class="muted">Aviso legal · Política de privacidad</div>
-      </div>
+    <div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px">
+      <div class="muted">© <span id="year"></span> Estudio Jurídico Aquino &amp; Asociados — Todos los derechos reservados</div>
+      <div class="muted">Aviso legal · Política de privacidad</div>
     </div>
   </footer>
 
+  <script>
+    // Año automático
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Menú responsive
+    (function(){
+      const toggle = document.querySelector('.menu-toggle');
+      const menu = document.getElementById('menu');
+      toggle.addEventListener('click', function(){
+        const isOpen = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!isOpen));
+        menu.classList.toggle('show');
+      });
+
+      // Cerrar menú al cambiar tamaño a desktop
+      window.addEventListener('resize', function(){
+        if(window.innerWidth > 700){
+          menu.classList.remove('show');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+
+    // Autocompletar "Área" y llevar al formulario
+    (function(){
+      const consultButtons = document.querySelectorAll('.consult-btn');
+      consultButtons.forEach(btn => {
+        btn.addEventListener('click', function(){
+          const card = this.closest('.lawyer');
+          const areaVal = (card && card.dataset && card.dataset.area) ? card.dataset.area : '';
+          const areaInput = document.getElementById('area');
+          if(areaInput) areaInput.value = areaVal;
+
+          // Llevar al formulario y enfocar el nombre
+          const formSection = document.getElementById('consultas');
+          if(formSection){
+            formSection.scrollIntoView({behavior:'smooth', block:'start'});
+            setTimeout(()=>{ const name= document.getElementById('name'); if(name) name.focus(); }, 600);
+          }
+        });
+      });
+    })();
+
+    // Nota: Eliminé scripts que hacían referencia a elementos que no existían (post-payment, ajax) para evitar errores en móviles.
+  </script>
+
 </body>
 </html>
+
