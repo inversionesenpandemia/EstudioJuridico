@@ -84,8 +84,8 @@
             </div>
 
             <div style="display:flex;gap:10px;margin-top:10px">
-              <button id="pay-now">Pagar consulta</button>
-              <button id="book-now" style="background:#f3f4f6;color:var(--dark);font-weight:700">Solicitar turno</button>
+              <div style="margin-top:10px"><a href="#abogados"><button>Pedir consulta</button></a></div>
+              
             </div>
           </div>
         </div>
@@ -114,95 +114,98 @@
     <section id="abogados">
       <h3>Equipo de abogados</h3>
       <div class="lawyers">
-        <!-- Abogada 1: Jubilaciones y aportes previsionales -->
-        <div class="card lawyer" data-lawyer-id="1">
-          <img class="avatar" src="img/avatarmujer2.png" alt="Abogada Jubilaciones">
+        <div class="card lawyer">
+          <img class="avatar" src="/img/pngtree-female-lawyer-professional-worker-avatar-png-image_15552148.png" alt="Abogada Jubilaciones">
           <h4>Dra. Flavia Singh</h4>
           <div class="muted">MP 12345657</div>
           <div class="muted">Especialista en jubilaciones y aportes previsionales</div>
           <p style="margin-top:10px">Asesoramiento en trámites previsionales, recursos administrativos y juicios previsionales.</p>
           <div style="margin-top:10px"><span class="price">Precio consulta: $4.500</span></div>
-          <div style="margin-top:10px;display:flex;gap:8px">
-            <button class="consult-btn" data-lawyer="1" data-precio="4500" data-moneda="ARS">Pedir consulta</button>
-          </div>
+          <div style="margin-top:10px"><a href="#consultas"><button>Pedir consulta</button></a></div>
         </div>
 
-        <!-- Abogada 2: Migraciones -->
-        <div class="card lawyer" data-lawyer-id="2">
-          <img class="avatar" src="img/avatarmujer1.jpg" alt="Abogada Migraciones">
+        <div class="card lawyer">
+          <img class="avatar" src="/img/mujer-confiada-rompe-barrera_1308-176959.jpg" alt="Abogada Migraciones">
           <h4>Lic. Liliana Aquino</h4>
           <div class="muted">MP 12343543</div>
           <div class="muted">Especialista en migraciones</div>
           <p style="margin-top:10px">Visas, residencia, apelaciones migratorias y asesoramiento a empresas.</p>
           <div style="margin-top:10px"><span class="price">Precio consulta: $6.000</span></div>
-          <div style="margin-top:10px;display:flex;gap:8px">
-            <button class="consult-btn" data-lawyer="2">Pedir consulta</button>
-          </div>
+          <div style="margin-top:10px"><a href="#consultas"><button>Pedir consulta</button></a></div>
         </div>
 
-        <!-- Abogado 3: Derecho laboral -->
-        <div class="card lawyer" data-lawyer-id="3">
-          <img class="avatar" src="img/avatarhombre.jpg" alt="Abogado Laboral">
+        <div class="card lawyer">
+          <img class="avatar" src="/img/imagen-perfil-avatar-hombre-aislada-fondo-imagen-profil-avatar-hombre_1293239-4870.jpg" alt="Abogado Laboral">
           <h4>Dr. Martín López</h4>
           <div class="muted">MP 3455465657567</div>
           <div class="muted">Especialista en derecho laboral</div>
           <p style="margin-top:10px">Despidos, demandas laborales, negociación y representación en juzgados.</p>
           <div style="margin-top:10px"><span class="price">Precio consulta: $5.500</span></div>
-          <div style="margin-top:10px;display:flex;gap:8px">
-            <button class="consult-btn" data-lawyer="3">Pedir consulta</button>
-          </div>
+          <div style="margin-top:10px"><a href="#consultas"><button>Pedir consulta</button></a></div>
         </div>
       </div>
     </section>
 
     <section id="consultas">
-      <h3>Solicitar consulta</h3>
-      <div class="card">
-        <form id="consulta-form" action="https://formsubmit.co/inversionesenpandemia@gmail.com" method="POST">
-          <input type="email" id="selected-lawyer" name="email" value="">
-          <div class="row">
-            <div style="flex:1">
-              <label for="name">Nombre completo</label>
-              <input id="name" name="name" type="text" required>
-            </div>
-            <div style="width:220px">
-              <label for="phone">Teléfono</label>
-              <input id="phone" name="phone" type="text">
-            </div>
-          </div>
+  <h3>Solicitar consulta</h3>
+  <div class="card">
+    <!-- FORMULARIO LISTO PARA FORMSubmit -->
+    <form action="https://formsubmit.co/inversionesenpandemia@gmail.com" method="POST">
+      
+      <!-- Campos ocultos de configuración -->
+      <input type="hidden" name="_next" value="https://tusitio.com/gracias.html"> <!-- URL donde redirigir tras enviar -->
+      <input type="hidden" name="_subject" value="Nueva consulta desde la web">
+      <input type="hidden" name="_captcha" value="false"> <!-- Opcional: desactiva captcha -->
+      <input type="hidden" name="_template" value="table"> <!-- Opcional: formato del correo -->
 
-          <div style="margin-top:12px">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required>
-          </div>
-
-          <div style="margin-top:12px">
-            <label for="area">Área</label>
-            <select id="area" name="area">
-              <option>Derecho Civil</option>
-              <option>Derecho Penal</option>
-              <option>Laboral</option>
-              <option>Migraciones</option>
-              <option>Previsional</option>
-              <option>Otros</option>
-            </select>
-          </div>
-
-          <div style="margin-top:12px">
-            <label for="message">Resumen del caso (máx. 1200 caracteres)</label>
-            <textarea id="message" name="message" maxlength="1200"></textarea>
-          </div>
-
-          <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
-            <button type="submit">Enviar consulta</button>
-          </div>
-
-          <div id="form-msg" style="margin-top:10px;color:green;display:none"></div>
-        </form>
+      <div class="row">
+        <div style="flex:1">
+          <label for="name">Nombre completo</label>
+          <input id="name" name="name" type="text" required>
+        </div>
+        <div style="width:220px">
+          <label for="phone">Teléfono</label>
+          <input id="phone" name="phone" type="text">
+        </div>
       </div>
-    </section>
 
-    <section id="pagos" style="margin-top:24px">
+      <div style="margin-top:12px">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required>
+      </div>
+
+      <!-- Área de derecho (rellena automáticamente según el abogado que haga click) -->
+      <div style="margin-top:12px">
+        <label for="area">Área</label>
+        <input id="area" name="area" type="text" readonly placeholder="Se completará al elegir abogado">
+      </div>
+
+      <div style="margin-top:12px">
+        <label for="message">Resumen del caso (máx. 1200 caracteres)</label>
+        <textarea id="message" name="message" maxlength="1200"></textarea>
+      </div>
+
+      <div style="margin-top:12px">
+        <button type="submit">Enviar consulta</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  // --- JS para completar automáticamente el área del abogado seleccionado ---
+  document.querySelectorAll('.lawyer button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const areaInput = document.getElementById('area');
+      const lawyerCard = btn.closest('.lawyer');
+      const specialty = lawyerCard.querySelector('.muted:nth-child(4)').innerText; // segunda línea muted (especialidad)
+      areaInput.value = specialty;
+    });
+  });
+</script>
+
+
+ <section id="pagos" style="margin-top:24px">
   <h3>Métodos de pago</h3>
   <div class="card">
     <p class="muted">Elegí tu método de pago. Una vez realizado, podrás enviar tu consulta y recibirás el enlace de Zoom por correo.</p>
@@ -227,32 +230,6 @@
     </div>
   </div>
 </section>
-
-<!-- Formulario post-pago -->
-<section id="post-payment" style="display:none;margin-top:28px">
-  <h3>Envía tu consulta</h3>
-  <div class="card">
-    <form id="post-payment-form" action="api/enviar-consulta.php" method="POST">
-      <div style="margin-bottom:12px">
-        <label for="pp-name">Nombre completo</label>
-        <input type="text" id="pp-name" name="name" required>
-      </div>
-      <div style="margin-bottom:12px">
-        <label for="pp-email">Email</label>
-        <input type="email" id="pp-email" name="email" required>
-      </div>
-      <div style="margin-bottom:12px">
-        <label for="pp-message">Escribe tu consulta</label>
-        <textarea id="pp-message" name="message" required></textarea>
-      </div>
-      <button type="submit">Enviar consulta</button>
-      <div id="pp-msg" style="margin-top:10px;color:green;display:none">
-        Consulta enviada ✅ Recibirás el enlace de Zoom y el horario por email.
-      </div>
-    </form>
-  </div>
-</section>
-
 <style>
   .pay-btn {
     display:inline-block;
@@ -294,8 +271,6 @@
     }).catch(err=>alert("Error al enviar la consulta"));
   });
 </script>
-
-
     <section id="contacto" style="margin-top:28px">
       <h3>Ubicación y contacto</h3>
       <div class="card">
