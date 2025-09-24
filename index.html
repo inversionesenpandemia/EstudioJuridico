@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estudio Jurídico - Atención profesional</title>
+  <meta name="description" content="Estudio jurídico. Consultas online, turnos y pagos digitales. Atención en causas civiles, penales y laborales.">
+  <style>
+    :root{--accent:#0b5cff;--dark:#0b1b2b;--muted:#6b7280;--card-bg:#ffffff;--radius:12px;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color-scheme:light}
+    *{box-sizing:border-box}
+    body{margin:0;background:#f6f8fb;color:var(--dark);line-height:1.45}
+    header{background:linear-gradient(90deg,var(--accent),#2b6ef6);color:white;padding:18px 20px}
+    .container{max-width:1100px;margin:0 auto;padding:20px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand h1{font-size:18px;margin:0}
+    nav{display:flex;gap:16px}
+    nav a{color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600}
+    .cta{background:white;color:var(--accent);padding:8px 12px;border-radius:10px;font-weight:700}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:34px 0}
+    .hero h2{font-size:28px;margin:0 0 10px}
+    .hero p{margin:0 0 18px;color:var(--muted)}
+    .card{background:var(--card-bg);border-radius:var(--radius);padding:18px;box-shadow:0 6px 18px rgba(20,30,60,0.06)}
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
+    .service h3{margin:0 0 8px}
+    .service p{margin:0;color:var(--muted)}
+    form .row{display:flex;gap:12px}
+    label{display:block;font-size:13px;margin-bottom:6px}
+    input[type=text],input[type=email],select,textarea{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px;font-size:14px}
+    textarea{min-height:120px;resize:vertical}
+    button{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+    footer{padding:30px 0;color:var(--muted)}
+    @media (max-width: 900px){.hero{grid-template-columns:1fr}.services{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:600px){nav{display:none}.menu-toggle{display:inline-block}.services{grid-template-columns:1fr}.topbar{gap:8px}.brand h1{font-size:16px}}
+    .muted{color:var(--muted)}.flex{display:flex;align-items:center}.stack{display:flex;flex-direction:column;gap:8px}.pill{background:#f0f4ff;padding:6px 10px;border-radius:999px;color:#06316a;font-weight:700}
+    /* Abogados */
+    .lawyers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+    .lawyer .avatar{width:100%;height:180px;object-fit:cover;border-radius:10px}
+    .lawyer h4{margin:10px 0 4px}
+    .price{font-weight:800}
+    @media(max-width:800px){.lawyers{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container topbar">
+      <div class="brand">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <rect width="24" height="24" rx="6" fill="white" opacity="0.06"></rect>
+          <path d="M6 18V12l6-6 6 6v6" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <div>
+          <h1>Estudio Jurídico Aquino & Asociados</h1>
+          <div style="font-size:12px;color:rgba(255,255,255,0.9)">Especialistas en civil, penal, laborales y migraciones</div>
+        </div>
+      </div>
+
+      <nav aria-label="Menú principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#abogados">Abogados</a>
+        <a href="#consultas">Consultas</a>
+        <a href="#pagos">Pagos</a>
+        <a href="#contacto" class="cta">Contacto</a>
+      </nav>
+
+      <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" style="display:none;background:transparent;border:none;color:white;font-weight:700">☰</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h2>Asesoría legal profesional — rápida y confiable</h2>
+        <p>Brindamos asesoramiento desde la primera consulta por video-llamada, seguimiento del caso y representación. Agenda una consulta online y paga con MercadoPago, PayPal o tarjeta.</p>
+
+        <div class="card">
+          <div class="stack">
+            <div class="flex" style="justify-content:space-between;align-items:center">
+              <div>
+                <strong>Turno exprés: Consulta inicial</strong>
+                <div class="muted" style="font-size:13px">30 minutos con un abogado senior</div>
+              </div>
+              <div class="pill">Reserva y pago online</div>
+            </div>
+
+            <div style="display:flex;gap:10px;margin-top:10px">
+              <button id="pay-now">Pagar consulta</button>
+              <button id="book-now" style="background:#f3f4f6;color:var(--dark);font-weight:700">Solicitar turno</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h3>Contacto rápido</h3>
+        <p class="muted">Tel: +54 9 11 1234-5678<br>Email: contacto@estudio-ejemplo.com</p>
+        <hr style="margin:12px 0;border:none;border-top:1px solid #eef2f8">
+        <div>
+          <strong>Horario</strong>
+          <p class="muted" style="margin:6px 0">Lunes a Viernes — 9:00 a 18:00</p>
+        </div>
+      </aside>
+    </section>
+
+    <section id="servicios">
+      <h3>Servicios</h3>
+      <div class="services">
+        <div class="card service"><h3>Derecho Civil</h3><p>Contratos, sucesiones y responsabilidad civil.</p></div>
+        <div class="card service"><h3>Derecho Penal</h3><p>Defensa penal y asesoramiento en causas complejas.</p></div>
+        <div class="card service"><h3>Laboral</h3><p>Despidos, indemnizaciones y negociaciones colectivas.</p></div>
+      </div>
+    </section>
+
+    <section id="abogados">
+      <h3>Equipo de abogados</h3>
+      <div class="lawyers">
+        <!-- Abogada 1: Jubilaciones y aportes previsionales -->
+        <div class="card lawyer" data-lawyer-id="1">
+          <img class="avatar" src="/img/pngtree-female-lawyer-professional-worker-avatar-png-image_15552148.png" alt="Abogada Jubilaciones">
+          <h4>Dra. Flavia Singh</h4>
+          <div class="muted">MP 12345657</div>
+          <div class="muted">Especialista en jubilaciones y aportes previsionales</div>
+          <p style="margin-top:10px">Asesoramiento en trámites previsionales, recursos administrativos y juicios previsionales.</p>
+          <div style="margin-top:10px"><span class="price">Precio consulta: $4.500</span></div>
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <button class="consult-btn" data-lawyer="1" data-precio="4500" data-moneda="ARS">Pedir consulta</button>
+          </div>
+        </div>
+
+        <!-- Abogada 2: Migraciones -->
+        <div class="card lawyer" data-lawyer-id="2">
+          <img class="avatar" src="/img/mujer-confiada-rompe-barrera_1308-176959.jpg" alt="Abogada Migraciones">
+          <h4>Lic. Liliana Aquino</h4>
+          <div class="muted">MP 12343543</div>
+          <div class="muted">Especialista en migraciones</div>
+          <p style="margin-top:10px">Visas, residencia, apelaciones migratorias y asesoramiento a empresas.</p>
+          <div style="margin-top:10px"><span class="price">Precio consulta: $6.000</span></div>
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <button class="consult-btn" data-lawyer="2">Pedir consulta</button>
+          </div>
+        </div>
+
+        <!-- Abogado 3: Derecho laboral -->
+        <div class="card lawyer" data-lawyer-id="3">
+          <img class="avatar" src="/img/imagen-perfil-avatar-hombre-aislada-fondo-imagen-profil-avatar-hombre_1293239-4870.jpg" alt="Abogado Laboral">
+          <h4>Dr. Martín López</h4>
+          <div class="muted">MP 3455465657567</div>
+          <div class="muted">Especialista en derecho laboral</div>
+          <p style="margin-top:10px">Despidos, demandas laborales, negociación y representación en juzgados.</p>
+          <div style="margin-top:10px"><span class="price">Precio consulta: $5.500</span></div>
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <button class="consult-btn" data-lawyer="3">Pedir consulta</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="consultas">
+      <h3>Solicitar consulta</h3>
+      <div class="card">
+        <form id="consulta-form" action="https://formsubmit.co/inversionesenpandemia@gmail.com" method="POST">
+          <input type="hidden" id="selected-lawyer" name="lawyer_id" value="">
+          <div class="row">
+            <div style="flex:1">
+              <label for="name">Nombre completo</label>
+              <input id="name" name="name" type="text" required>
+            </div>
+            <div style="width:220px">
+              <label for="phone">Teléfono</label>
+              <input id="phone" name="phone" type="text">
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required>
+          </div>
+
+          <div style="margin-top:12px">
+            <label for="area">Área</label>
+            <select id="area" name="area">
+              <option>Derecho Civil</option>
+              <option>Derecho Penal</option>
+              <option>Laboral</option>
+              <option>Migraciones</option>
+              <option>Previsional</option>
+              <option>Otros</option>
+            </select>
+          </div>
+
+          <div style="margin-top:12px">
+            <label for="message">Resumen del caso (máx. 1200 caracteres)</label>
+            <textarea id="message" name="message" maxlength="1200"></textarea>
+          </div>
+
+          <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+            <button type="submit">Enviar consulta</button>
+          </div>
+
+          <div id="form-msg" style="margin-top:10px;color:green;display:none"></div>
+        </form>
+      </div>
+    </section>
+
+    <section id="pagos" style="margin-top:24px">
+  <h3>Métodos de pago</h3>
+  <div class="card">
+    <p class="muted">Elegí tu método de pago. Una vez realizado, podrás enviar tu consulta y recibirás el enlace de Zoom por correo.</p>
+
+    <div style="display:flex;gap:16px;margin-top:18px;flex-wrap:wrap;align-items:center">
+
+      <!-- BOTÓN MERCADO PAGO -->
+      <div>
+        <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+          data-preference-id="255770860-77eabc4f-e9b5-49fb-9ffa-60f88b3e0e67"
+          data-source="button">
+        </script>
+      </div>
+
+      <!-- BOTÓN PAYPAL -->
+      <a href="https://paypal.me/invenpan" 
+         class="pay-btn paypal" target="_blank">🅿️ Pagar con PayPal</a>
+    </div>
+
+    <div style="margin-top:12px;font-size:13px;color:var(--muted)">
+      Una vez confirmado el pago, podrás enviar tu consulta desde el formulario.
+    </div>
+  </div>
+</section>
+
+<!-- Formulario post-pago -->
+<section id="post-payment" style="display:none;margin-top:28px">
+  <h3>Envía tu consulta</h3>
+  <div class="card">
+    <form id="post-payment-form" action="api/enviar-consulta.php" method="POST">
+      <div style="margin-bottom:12px">
+        <label for="pp-name">Nombre completo</label>
+        <input type="text" id="pp-name" name="name" required>
+      </div>
+      <div style="margin-bottom:12px">
+        <label for="pp-email">Email</label>
+        <input type="email" id="pp-email" name="email" required>
+      </div>
+      <div style="margin-bottom:12px">
+        <label for="pp-message">Escribe tu consulta</label>
+        <textarea id="pp-message" name="message" required></textarea>
+      </div>
+      <button type="submit">Enviar consulta</button>
+      <div id="pp-msg" style="margin-top:10px;color:green;display:none">
+        Consulta enviada ✅ Recibirás el enlace de Zoom y el horario por email.
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+  .pay-btn {
+    display:inline-block;
+    padding:12px 20px;
+    border-radius:10px;
+    font-weight:700;
+    text-decoration:none;
+    text-align:center;
+    min-width:200px;
+  }
+  .pay-btn.paypal {
+    background:#ffc439;
+    color:#111;
+  }
+  .pay-btn.paypal:hover { background:#e0ac25; }
+</style>
+
+<script>
+  // Simular que tras volver del pago se muestra el formulario
+  // Podés hacer que MercadoPago/PayPal redirijan a tu sitio con ?pago=ok
+  document.addEventListener("DOMContentLoaded", function(){
+    const params = new URLSearchParams(window.location.search);
+    if(params.get("pago") === "ok"){
+      document.getElementById("post-payment").style.display = "block";
+      window.scrollTo({ top: document.getElementById("post-payment").offsetTop, behavior: 'smooth' });
+    }
+  });
+
+  // Enviar consulta por AJAX
+  document.getElementById("post-payment-form").addEventListener("submit", function(e){
+    e.preventDefault();
+    var form = this;
+    fetch(form.action, {
+      method: "POST",
+      body: new FormData(form)
+    }).then(r=>r.text()).then(resp=>{
+      document.getElementById("pp-msg").style.display = "block";
+      form.reset();
+    }).catch(err=>alert("Error al enviar la consulta"));
+  });
+</script>
+
+
+    <section id="contacto" style="margin-top:28px">
+      <h3>Ubicación y contacto</h3>
+      <div class="card">
+        <p class="muted">Oficina central: Calle Falsa 123, Ciudad — Consultas por turno previo.</p>
+        <p class="muted">Síguenos: Facebook · LinkedIn</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+        <div class="muted">© <span id="year"></span> Estudio Jurídico Pérez & Asociados — Todos los derechos reservados</div>
+        <div class="muted">Aviso legal · Política de privacidad</div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
