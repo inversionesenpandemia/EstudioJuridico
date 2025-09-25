@@ -1,0 +1,386 @@
+
+<!-- index.html (modificado sobre tu código original; paga y scripts conservados) -->
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estudio Jurídico - Atención profesional</title>
+  <meta name="description" content="Estudio jurídico. Consultas online, turnos y pagos digitales. Atención en causas civiles, penales y laborales.">
+  <style>
+    :root{--accent:#0b5cff;--dark:#0b1b2b;--muted:#6b7280;--card-bg:#ffffff;--radius:12px;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color-scheme:light}
+    *{box-sizing:border-box}
+    body{margin:0;background:#f6f8fb;color:var(--dark);line-height:1.45}
+    header{background:linear-gradient(90deg,var(--accent),#2b6ef6);color:white;padding:18px 20px}
+    .container{max-width:1100px;margin:0 auto;padding:20px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand h1{font-size:18px;margin:0}
+    nav{display:flex;gap:16px}
+    nav a{color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600}
+    .cta{background:white;color:var(--accent);padding:8px 12px;border-radius:10px;font-weight:700}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:34px 0}
+    .hero h2{font-size:28px;margin:0 0 10px}
+    .hero p{margin:0 0 18px;color:var(--muted)}
+    .card{background:var(--card-bg);border-radius:var(--radius);padding:18px;box-shadow:0 6px 18px rgba(20,30,60,0.06)}
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
+    .service h3{margin:0 0 8px}
+    .service p{margin:0;color:var(--muted)}
+    form .row{display:flex;gap:12px}
+    label{display:block;font-size:13px;margin-bottom:6px}
+    input[type=text],input[type=email],select,textarea{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px;font-size:14px}
+    textarea{min-height:120px;resize:vertical}
+    button{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+    footer{padding:30px 0;color:var(--muted)}
+    @media (max-width: 900px){.hero{grid-template-columns:1fr}.services{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:600px){nav{display:none}.menu-toggle{display:inline-block}.services{grid-template-columns:1fr}.topbar{gap:8px}.brand h1{font-size:16px}}
+    .muted{color:var(--muted)}.flex{display:flex;align-items:center}.stack{display:flex;flex-direction:column;gap:8px}.pill{background:#f0f4ff;padding:6px 10px;border-radius:999px;color:#06316a;font-weight:700}
+    /* Abogados */
+    .lawyers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+    .lawyer .avatar{width:100%;height:180px;object-fit:cover;border-radius:10px}
+    .lawyer h4{margin:10px 0 4px}
+    .price{font-weight:800}
+    @media(max-width:800px){.lawyers{grid-template-columns:1fr}}
+
+    /* ===== Carousel styles (servicios, galería, testimonios) ===== */
+    .carousel{position:relative;overflow:hidden;border-radius:12px}
+    .carousel-track{display:flex;transition:transform 450ms ease}
+    .carousel-slide{min-width:100%;box-sizing:border-box;padding:18px}
+    .carousel-controls{position:absolute;top:50%;left:0;right:0;display:flex;justify-content:space-between;transform:translateY(-50%);pointer-events:none}
+    .carousel-controls button{pointer-events:auto;background:white;border:0;padding:8px;border-radius:8px;margin:0 12px;box-shadow:0 6px 18px rgba(20,30,60,0.06)}
+    .carousel-dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
+    .dot{width:10px;height:10px;border-radius:50%;background:#e6e9ef;cursor:pointer;border:0}
+    .dot.active{background:var(--accent)}
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .service-card{background:#fff;padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(20,30,60,0.04)}
+    .gallery-img{width:100%;height:260px;object-fit:cover;border-radius:10px}
+    .testimonial{display:flex;gap:12px;align-items:flex-start}
+    .testimonial .avatar{width:64px;height:64px;border-radius:999px;object-fit:cover}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container topbar">
+      <div class="brand">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <rect width="24" height="24" rx="6" fill="white" opacity="0.06"></rect>
+          <path d="M6 18V12l6-6 6 6v6" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <div>
+          <h1>Estudio Jurídico Aquino & Asociados</h1>
+          <div style="font-size:12px;color:rgba(255,255,255,0.9)">Especialistas en civil, penal, laborales y migraciones</div>
+        </div>
+      </div>
+
+      <nav aria-label="Menú principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#abogados">Abogados</a>
+        <a href="#galeria">Galería</a>
+        <a href="#opiniones">Opiniones</a>
+        <a href="#pagos">Pagos</a>
+        <a href="#contacto" class="cta">Contacto</a>
+      </nav>
+
+      <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" style="display:none;background:transparent;border:none;color:white;font-weight:700">☰</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h2>Asesoría legal profesional — rápida y confiable</h2>
+        <p>Brindamos asesoramiento desde la primera consulta por video-llamada, seguimiento del caso y representación. Agenda una consulta online y paga con MercadoPago, PayPal o tarjeta.</p>
+
+        <div class="card">
+          <div class="stack">
+            <div class="flex" style="justify-content:space-between;align-items:center">
+              <div>
+                <strong>Turno exprés: Consulta inicial</strong>
+                <div class="muted" style="font-size:13px">30 minutos con un abogado senior</div>
+              </div>
+              <div class="pill">Reserva y pago online</div>
+            </div>
+
+            <div style="display:flex;gap:10px;margin-top:10px">
+              <button id="pay-now">Pagar consulta</button>
+              <button id="book-now" style="background:#f3f4f6;color:var(--dark);font-weight:700">Solicitar turno</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h3>Contacto rápido</h3>
+        <p class="muted">Tel: +54 9 11 1234-5678<br>Email: contacto@estudio-ejemplo.com</p>
+        <hr style="margin:12px 0;border:none;border-top:1px solid #eef2f8">
+        <div>
+          <strong>Horario</strong>
+          <p class="muted" style="margin:6px 0">Lunes a Viernes — 9:00 a 18:00</p>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ====== SERVICIOS (mantengo tu contenido pero lo envuelvo en un carrusel) ====== -->
+    <section id="servicios">
+      <h3>Servicios</h3>
+
+      <!-- Mantengo las tarjetas originales, pero las agrupo en slides para el carrusel -->
+      <div class="card carousel" id="services-carousel" data-autoplay="true" data-interval="5500" aria-roledescription="carrusel de servicios">
+        <div class="carousel-track">
+          <!-- Slide A: las mismas 3 tarjetas que tenías -->
+          <div class="carousel-slide">
+            <div class="services" id="services-original">
+              <div class="card service"><h3>Derecho Civil</h3><p>Contratos, sucesiones y responsabilidad civil.</p></div>
+              <div class="card service"><h3>Derecho Penal</h3><p>Defensa penal y asesoramiento en causas complejas.</p></div>
+              <div class="card service"><h3>Laboral</h3><p>Despidos, indemnizaciones y negociaciones colectivas.</p></div>
+            </div>
+          </div>
+
+          <!-- Slide B: puedes duplicar u agregar más servicios aquí (no toco tu contenido original) -->
+          <div class="carousel-slide">
+            <div class="services">
+              <div class="card service"><h3>Migraciones</h3><p>Visas, residencia, apelaciones migratorias y asesoramiento a empresas.</p></div>
+              <div class="card service"><h3>Previsional</h3><p>Jubilaciones, recursos administrativos y juicios previsionales.</p></div>
+              <div class="card service"><h3>Asesoría Corporativa</h3><p>Constitución de sociedades, contratos comerciales y compliance.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-controls">
+          <button class="prev" aria-label="Anterior">◀</button>
+          <button class="next" aria-label="Siguiente">▶</button>
+        </div>
+
+        <div class="carousel-dots" aria-hidden="false">
+          <button class="dot active" data-index="0"></button>
+          <button class="dot" data-index="1"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== EQUIPO (sin cambios de contenido, solo hago que 'Pedir consulta' redirija al perfil) ====== -->
+    <section id="abogados">
+      <h3>Equipo de abogados</h3>
+      <div class="lawyers">
+        <!-- Abogada 1 -->
+        <div class="card lawyer" data-lawyer-id="1">
+          <img class="avatar" src="/img/mujer-confiada-rompe-barrera_1308-176959.jpg" alt="Abogada Jubilaciones">
+          <h4>Dra. Flavia Singh</h4>
+          <div class="muted">MP 12345657</div>
+          <div class="muted">Especialista en jubilaciones y aportes previsionales</div>
+          <p style="margin-top:10px">Asesoramiento en trámites previsionales, recursos administrativos y juicios previsionales.</p>
+          <div style="margin-top:10px"><span class="price">Precio consulta: $4.500</span></div>
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <!-- Cambio: al hacer clic redirige al perfil del abogado (plantilla profile.html) -->
+            <button class="consult-btn" data-lawyer="1" data-precio="4500" data-moneda="ARS" onclick="location.href='profile.html?lawyer=1'">Pedir consulta</button>
+          </div>
+        </div>
+
+        <!-- Abogada 2 -->
+        <div class="card lawyer" data-lawyer-id="2">
+          <img class="avatar" src="/img/pngtree-female-lawyer-professional-worker-avatar-png-image_15552148.png" alt="Abogada Migraciones">
+          <h4>Lic. Liliana Aquino</h4>
+          <div class="muted">MP 12343543</div>
+          <div class="muted">Especialista en migraciones</div>
+          <p style="margin-top:10px">Visas, residencia, apelaciones migratorias y asesoramiento a empresas.</p>
+          <div style="margin-top:10px"><span class="price">Precio consulta: $6.000</span></div>
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <button class="consult-btn" data-lawyer="2" onclick="location.href='profile.html?lawyer=2'">Pedir consulta</button>
+          </div>
+        </div>
+
+        <!-- Abogado 3 -->
+        <div class="card lawyer" data-lawyer-id="3">
+          <img class="avatar" src="img/imagen-perfil-avatar-hombre-aislada-fondo-imagen-profil-avatar-hombre_1293239-4870.jpg" alt="Abogado Laboral">
+          <h4>Dr. Martín López</h4>
+          <div class="muted">MP 3455465657567</div>
+          <div class="muted">Especialista en derecho laboral</div>
+          <p style="margin-top:10px">Despidos, demandas laborales, negociación y representación en juzgados.</p>
+          <div style="margin-top:10px"><span class="price">Precio consulta: $5.500</span></div>
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <button class="consult-btn" data-lawyer="3" onclick="location.href='profile.html?lawyer=3'">Pedir consulta</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== SOLICITAR CONSULTA: ahora indico que el formulario está en profile.html (no borro nada del original de pagos) ====== -->
+    <section id="consultas">
+      <h3>Solicitar consulta</h3>
+      <div class="card">
+        <p class="muted">Para solicitar una consulta individual, hacé clic en "Pedir consulta" en el perfil del abogado. Allí encontrarás el formulario específico para cada profesional y podrás completar los datos y pagar si corresponde.</p>
+        <p class="muted">Si querés un formulario general (para reservar sin elegir abogado), avisame y puedo dejar una versión separada que linkee desde aquí.</p>
+      </div>
+    </section>
+
+    
+    <!-- ====== GALERÍA DEL LUGAR FÍSICO (nueva sección, agrega tus imágenes) ====== -->
+    <section id="galeria" style="margin-top:28px">
+      <h3>Nuestra oficina</h3>
+      <div class="card carousel" id="gallery-carousel" data-autoplay="true" data-interval="4500">
+        <div class="carousel-track">
+          <div class="carousel-slide"><img class="gallery-img" loading="lazy" src="img/estudio.png" alt="Recepción"></div>
+          <div class="carousel-slide"><img class="gallery-img" loading="lazy" src="/img/Oficinas.jpg" alt="Sala de reuniones"></div>
+          <div class="carousel-slide"><img class="gallery-img" loading="lazy" src="/img/oficina.jpg" alt="Fachada"></div>
+        </div>
+        <div class="carousel-controls">
+          <button class="prev" aria-label="Anterior">◀</button>
+          <button class="next" aria-label="Siguiente">▶</button>
+        </div>
+        <div class="carousel-dots"><button class="dot active" data-index="0"></button><button class="dot" data-index="1"></button><button class="dot" data-index="2"></button></div>
+      </div>
+    </section>
+
+    <!-- ====== OPINIONES (nueva sección de testimonios) ====== -->
+    <section id="opiniones" style="margin-top:28px">
+      <h3>Opiniones de clientes</h3>
+      <div class="card carousel" id="testimonials-carousel" data-autoplay="true" data-interval="6000">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <div class="testimonial">
+              <img class="avatar" loading="lazy" src="/img/maria.jpg" alt="María">
+              <div><div class="muted">★★★★★</div><blockquote style="margin:8px 0">Atención excelente. Resolvieron mi caso con mucha claridad.</blockquote><div style="font-weight:700">María G.</div></div>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="testimonial">
+              <img class="avatar" loading="lazy" src="/img/jose.png" alt="José">
+              <div><div class="muted">★★★★★</div><blockquote style="margin:8px 0">Profesionales y con excelente seguimiento.</blockquote><div style="font-weight:700">José M.</div></div>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="testimonial">
+              <img class="avatar" loading="lazy" src="/img/marta.jpg" alt="Laura">
+              <div><div class="muted">★★★★★</div><blockquote style="margin:8px 0">Me ayudaron con mi trámite migratorio. Muy recomendables.</blockquote><div style="font-weight:700">Laura D.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-controls">
+          <button class="prev" aria-label="Anterior">◀</button>
+          <button class="next" aria-label="Siguiente">▶</button>
+        </div>
+
+        <div class="carousel-dots"><button class="dot active" data-index="0"></button><button class="dot" data-index="1"></button><button class="dot" data-index="2"></button></div>
+      </div>
+    </section>
+
+    <!-- ====== CONTACTO + MAPA + REDES SOCIALES ====== -->
+    <section id="contacto" style="margin-top:28px">
+      <h3>Ubicación y contacto</h3>
+      <div class="card" style="display:grid;grid-template-columns:1fr 320px;gap:16px;align-items:start">
+        <div>
+          <p class="muted">Oficina central: Calle Falsa 123, Ciudad — Consultas por turno previo.</p>
+          <p class="muted">Tel: <a href="tel:+5491112345678">+54 9 11 1234-5678</a><br>Email: <a href="mailto:contacto@estudio-ejemplo.com">contacto@estudio-ejemplo.com</a></p>
+
+          <!-- Redes sociales: abrir en nueva pestaña -->
+          <div style="margin-top:12px;display:flex;gap:12px;align-items:center">
+            <a href="https://facebook.com/tu-pagina" target="_blank" rel="noopener" aria-label="Facebook">
+              <!-- pequeño ícono svg -->
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                <path d="M22 12.07C22 6.48 17.52 2 11.93 2S1.86 6.48 1.86 12.07c0 4.99 3.66 9.13 8.44 9.94v-7.03H8.23v-2.91h2.07V9.41c0-2.05 1.22-3.18 3.08-3.18.89 0 1.82.16 1.82.16v2h-1.03c-1.02 0-1.34.64-1.34 1.29v1.55h2.28l-.36 2.91h-1.92v7.03c4.78-.81 8.44-4.95 8.44-9.94z"/>
+              </svg>
+            </a>
+
+            <a href="https://linkedin.com/company/tu-pagina" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="#0A66C2" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                <path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.7-1.3 2.4-2.8 4.9-2.8C23 7.4 24 9.6 24 13.4V24h-5v-9.6c0-2.3-.04-5.2-3.2-5.2-3.2 0-3.7 2.5-3.7 5.1V24H8z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- MAPA EMBEBIDO: reemplaza la query si querés una ubicación precisa -->
+        <div style="min-height:220px">
+          <iframe
+            loading="lazy"
+            src="https://www.google.com/maps?q=Calle+Falsa+123+Ciudad&output=embed"
+            width="100%" height="220" style="border:0;border-radius:8px" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+        <div class="muted">© <span id="year"></span> Estudio Jurídico Aquino & Asociados — Todos los derechos reservados</div>
+        <div class="muted">Aviso legal · Política de privacidad</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Conservé el script JS original para mostrar post-payment si viene pago=ok (no modifiqué)
+    document.addEventListener("DOMContentLoaded", function(){
+      const params = new URLSearchParams(window.location.search);
+      if(params.get("pago") === "ok"){
+        document.getElementById("post-payment").style.display = "block";
+        window.scrollTo({ top: document.getElementById("post-payment").offsetTop, behavior: 'smooth' });
+      }
+    });
+
+    // Mantengo tu envio AJAX del post-payment-form (no modificado)
+    var ppForm = document.getElementById("post-payment-form");
+    if(ppForm){
+      ppForm.addEventListener("submit", function(e){
+        e.preventDefault();
+        var form = this;
+        fetch(form.action, {
+          method: "POST",
+          body: new FormData(form)
+        }).then(r=>r.text()).then(resp=>{
+          document.getElementById("pp-msg").style.display = "block";
+          form.reset();
+        }).catch(err=>alert("Error al enviar la consulta"));
+      });
+    }
+
+    // ====== Carrusel genérico ligero (va a manejar los 3 carruseles que agregué) ======
+    (function(){
+      function initCarousel(carouselId){
+        const c = document.getElementById(carouselId);
+        if(!c) return;
+        const track = c.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const prev = c.querySelector('.prev');
+        const next = c.querySelector('.next');
+        const dots = Array.from((c.querySelectorAll('.dot') || []));
+        let idx = 0;
+        const autoplay = c.dataset.autoplay === 'true';
+        const interval = parseInt(c.dataset.interval || 5000, 10);
+        let timer = null;
+        function update(){
+          const w = c.clientWidth;
+          track.style.transform = 'translateX(-' + (idx * w) + 'px)';
+          dots.forEach((d,i)=>d.classList.toggle('active', i===idx));
+        }
+        function go(i){ idx = (i + slides.length) % slides.length; update(); }
+        function nextSlide(){ go(idx+1); }
+        function prevSlide(){ go(idx-1); }
+        if(next) next.addEventListener('click', ()=>{ nextSlide(); reset(); });
+        if(prev) prev.addEventListener('click', ()=>{ prevSlide(); reset(); });
+        dots.forEach((d,i)=> d.addEventListener('click', ()=>{ go(i); reset(); }));
+        window.addEventListener('resize', update);
+        function start(){ if(autoplay){ stop(); timer = setInterval(nextSlide, interval); } }
+        function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+        function reset(){ stop(); start(); }
+        c.addEventListener('mouseenter', ()=>stop());
+        c.addEventListener('mouseleave', ()=>start());
+        start(); update();
+      }
+      initCarousel('services-carousel');
+      initCarousel('gallery-carousel');
+      initCarousel('testimonials-carousel');
+    })();
+
+    // Para el botón "Solicitar turno" del hero: redirijo a la sección de abogados
+    document.getElementById('book-now').addEventListener('click', function(){ location.href='#abogados'; });
+
+    // NOTA: Los botones 'Pedir consulta' dentro de cada abogado redirigen a profile.html?lawyer=X
+  </script>
+</body>
+</html>
