@@ -57,6 +57,38 @@
     .testimonial{display:flex;gap:12px;align-items:flex-start}
     .testimonial .avatar{width:64px;height:64px;border-radius:999px;object-fit:cover}
   </style>
+  
+/* Centrar slides del carrusel de testimonios y evitar cortes en las avatars */
+.carousel { overflow: hidden; }
+.carousel-track {
+  display: flex;
+  align-items: center; /* centra verticalmente las slides dentro del viewport */
+}
+.carousel-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 18px;
+  display: flex;
+  justify-content: center; /* centra el contenido horizontalmente */
+  align-items: center;
+}
+.carousel-slide .testimonial {
+  width: 100%;
+  max-width: 720px;      /* limita el ancho del contenido para que quede centrado */
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+.carousel-slide .testimonial .avatar {
+  flex: 0 0 64px;        /* tamaño fijo para evitar recortes inesperados */
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  object-fit: cover;
+  display: block;
+}
+
 </head>
 <body>
   <header>
@@ -581,6 +613,7 @@
 </style>
 </body>
 </html>
+
 
 
 
