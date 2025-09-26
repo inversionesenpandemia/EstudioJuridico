@@ -68,6 +68,9 @@
     .testimonial{display:flex;gap:12px;align-items:flex-start}
     .testimonial .avatar{width:64px;height:64px;border-radius:999px;object-fit:cover}
   </style>
+  <!-- Agregar esto en el <head> de tu página -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
   <header>
@@ -152,14 +155,29 @@
   </div>
 
       <aside class="card">
-        <h3>Contacto rápido</h3>
-        <p class="muted">Tel: +54 9 11 5808-4238<br>Email: dralilianaaquino@gmail.com</p>
-        <hr style="margin:12px 0;border:none;border-top:1px solid #eef2f8">
-        <div>
-          <strong>Horario</strong>
-          <p class="muted" style="margin:6px 0">Lunes a Viernes — 9:00 a 18:00</p>
-        </div>
-      </aside>
+  <h3>Contacto rápido</h3>
+  <p class="muted">
+    Tel: +54 9 11 5808-4238<br>
+    Email: dralilianaaquino@gmail.com
+  </p>
+  <hr style="margin:12px 0;border:none;border-top:1px solid #eef2f8">
+  <div>
+    <strong>Horario</strong>
+    <p class="muted" style="margin:6px 0">Lunes a Viernes — 9:00 a 18:00</p>
+  </div>
+
+  <!-- Botón WhatsApp -->
+  <div style="margin-top:15px">
+    <a href="https://wa.me/5491158084238" target="_blank" 
+       style="display:inline-flex;align-items:center;gap:8px;
+              background:#25D366;color:white;padding:10px 14px;
+              border-radius:8px;text-decoration:none;font-weight:600">
+      <i class="fab fa-whatsapp" style="font-size:20px"></i> 
+      Chatear por WhatsApp
+    </a>
+  </div>
+</aside>
+
     </section>
 
     <!-- ====== SERVICIOS (mantengo tu contenido pero lo envuelvo en un carrusel) ====== -->
@@ -678,6 +696,7 @@
 </style>
 </body>
 </html>
+
 
 
 
