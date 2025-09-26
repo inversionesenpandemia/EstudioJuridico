@@ -410,43 +410,55 @@
       });
     }
 
-    // ====== Carrusel genérico ligero (va a manejar los 3 carruseles que agregué) ======
-    (function(){
-      function initCarousel(carouselId){
-        const c = document.getElementById(carouselId);
-        if(!c) return;
-        const track = c.querySelector('.carousel-track');
-        const slides = Array.from(track.children);
-        const prev = c.querySelector('.prev');
-        const next = c.querySelector('.next');
-        const dots = Array.from((c.querySelectorAll('.dot') || []));
-        let idx = 0;
-        const autoplay = c.dataset.autoplay === 'true';
-        const interval = parseInt(c.dataset.interval || 5000, 10);
-        let timer = null;
-        function update(){
-          const w = c.clientWidth;
-          track.style.transform = 'translateX(-' + (idx * w) + 'px)';
-          dots.forEach((d,i)=>d.classList.toggle('active', i===idx));
-        }
-        function go(i){ idx = (i + slides.length) % slides.length; update(); }
-        function nextSlide(){ go(idx+1); }
-        function prevSlide(){ go(idx-1); }
-        if(next) next.addEventListener('click', ()=>{ nextSlide(); reset(); });
-        if(prev) prev.addEventListener('click', ()=>{ prevSlide(); reset(); });
-        dots.forEach((d,i)=> d.addEventListener('click', ()=>{ go(i); reset(); }));
-        window.addEventListener('resize', update);
-        function start(){ if(autoplay){ stop(); timer = setInterval(nextSlide, interval); } }
-        function stop(){ if(timer){ clearInterval(timer); timer=null; } }
-        function reset(){ stop(); start(); }
-        c.addEventListener('mouseenter', ()=>stop());
-        c.addEventListener('mouseleave', ()=>start());
-        start(); update();
-      }
-      initCarousel('services-carousel');
-      initCarousel('gallery-carousel');
-      initCarousel('testimonials-carousel');
-    })();
+    
+function initCarousel(carouselId){
+  const c = document.getElementById(carouselId);
+  if(!c) return;
+  const track = c.querySelector('.carousel-track');
+  const slides = Array.from(track.children);
+  const prev = c.querySelector('.prev');
+  const next = c.querySelector('.next');
+  const dots = Array.from((c.querySelectorAll('.dot') || []));
+  let idx = 0;
+  const autoplay = c.dataset.autoplay === 'true';
+  const interval = parseInt(c.dataset.interval || 5000, 10);
+  let timer = null;
+
+  function update(){
+    // centrar slide usando la posición real del slide (offsetLeft)
+    const slide = slides[idx];
+    if (!slide) return;
+    const offset = slide.offsetLeft;
+    track.style.transform = 'translateX(-' + offset + 'px)';
+    dots.forEach((d,i)=> d.classList.toggle('active', i===idx));
+  }
+
+  function go(i){ idx = (i + slides.length) % slides.length; update(); }
+  function nextSlide(){ go(idx+1); }
+  function prevSlide(){ go(idx-1); }
+
+  if(next) next.addEventListener('click', ()=>{ nextSlide(); reset(); });
+  if(prev) prev.addEventListener('click', ()=>{ prevSlide(); reset(); });
+  dots.forEach((d,i)=> d.addEventListener('click', ()=>{ go(i); reset(); }));
+
+  window.addEventListener('resize', update);
+
+  function start(){ if(autoplay){ stop(); timer = setInterval(nextSlide, interval); } }
+  function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+  function reset(){ stop(); start(); }
+
+  c.addEventListener('mouseenter', ()=>stop());
+  c.addEventListener('mouseleave', ()=>start());
+
+  // Asegurar posición correcta cuando imágenes o fuentes carguen
+  window.addEventListener('load', update);
+  // pequeño delay por si hay lazy-load
+  setTimeout(update, 300);
+
+  start();
+  update();
+}
+
 
     // Para el botón "Solicitar turno" del hero: redirijo a la sección de abogados
     document.getElementById('book-now').addEventListener('click', function(){ location.href='#abogados'; });
@@ -613,6 +625,7 @@
 </style>
 </body>
 </html>
+
 
 
 
