@@ -416,8 +416,74 @@
 
     // NOTA: Los botones 'Pedir consulta' dentro de cada abogado redirigen a profile.html?lawyer=X
   </script>
+  <a id="whatsapp-float" class="whatsapp-float" href="#" target="_blank" rel="noopener noreferrer" aria-label="Abrir chat de WhatsApp" title="Escríbenos por WhatsApp">
+  <!-- Icono SVG de WhatsApp (puedes sustituir por tu imagen) -->
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M20.52 3.48C18.17 1.13 15.03 0 11.65 0 5.04 0 .01 5.04 .01 11.63c0 2.05.53 4.05 1.54 5.81L0 24l6.82-1.77c1.64.9 3.48 1.36 5.33 1.36 6.61 0 11.64-5.04 11.64-11.63 0-3.38-1.13-6.52-3.01-8.78zM11.65 21.2c-1.6 0-3.17-.43-4.53-1.24l-.32-.19-4.05 1.05 1.09-3.95-.21-.33C3.07 14.02 2.6 12.01 2.6 9.99 2.6 6.02 6.06 2.57 11.65 2.57c3.06 0 5.88 1.19 7.98 3.35 2.1 2.16 3.25 4.99 3.25 8.11 0 5.07-4.06 9.2-9.23 9.2z"/>
+    <path d="M17.01 14.43c-.29-.15-1.71-.84-1.97-.94-.26-.11-.45-.15-.64.15-.19.29-.74.94-.9 1.13-.16.19-.32.21-.61.07-.29-.15-1.2-.44-2.29-1.39-.85-.75-1.43-1.69-1.6-1.98-.16-.29-.02-.45.13-.6.13-.12.29-.33.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.64-1.53-.88-2.1-.23-.55-.46-.47-.64-.48l-.55-.01c-.19 0-.5.07-.76.36-.26.28-1 1-1 2.45 0 1.45 1.03 2.86 1.17 3.06.14.2 2.02 3.28 4.9 4.6 2.85 1.31 2.85.87 3.36.81.5-.06 1.71-.7 1.95-1.38.24-.69.24-1.28.17-1.38-.07-.1-.26-.15-.55-.3z"/>
+  </svg>
+</a>
+
+<!-- CSS -->
+<style>
+.whatsapp-float {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 56px;
+  height: 56px;
+  background: #25D366; /* color oficial de WhatsApp */
+  color: #fff;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  z-index: 9999;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.whatsapp-float:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+}
+.whatsapp-float svg { display:block; }
+
+/* Mostrar solo en móvil (opcional) */
+/* @media (min-width: 768px) { .whatsapp-float { display:none; } } */
+</style>
+
+<!-- JavaScript -->
+<script>
+(function() {
+  // CONFIG -------------------------------------------------
+  // Número en formato internacional sin signos ni espacios (ej: 34612345678 para España, 15551234567 para EE. UU.)
+  var phoneNumber = "15551234567"; // REEMPLAZA por tu número
+  // Mensaje predefinido (se codificará)
+  var message = "Hola! Quisiera información sobre sus servicios."; // REEMPLAZA por tu mensaje
+  // -------------------------------------------------------
+
+  // Construye la URL de WhatsApp usando wa.me con mensaje pre-codificado
+  var encodedMessage = encodeURIComponent(message);
+  var waUrl = "https://wa.me/" + phoneNumber + "?text=" + encodedMessage;
+
+  // Alternativa: para compatibilidad usar "https://api.whatsapp.com/send?phone=..." si lo prefieres
+  // var waUrl = "https://api.whatsapp.com/send?phone=" + phoneNumber + "&text=" + encodedMessage;
+
+  var anchor = document.getElementById("whatsapp-float");
+  if (anchor) {
+    anchor.setAttribute("href", waUrl);
+
+    // Opcional: abrir en nueva ventana o detectar si es móvil y forzar app
+    // if (/Mobi|Android/i.test(navigator.userAgent)) {
+    //   anchor.setAttribute("href", "whatsapp://send?phone=" + phoneNumber + "&text=" + encodedMessage);
+    // }
+  }
+})();
+</script>
 </body>
 </html>
+
 
 
 
