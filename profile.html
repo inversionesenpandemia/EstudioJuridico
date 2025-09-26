@@ -68,6 +68,41 @@
         <div id="form-msg" style="margin-top:10px;color:green;display:none"></div>
       </form>
     </div>
+       <!-- Sección Métodos de pago -->
+<section id="pagos" style="margin-top:24px">
+  <div class="card">
+    <h3>Métodos de pago</h3>
+    <p class="muted" style="margin-top:6px">
+      Elegí tu método de pago seguro. Una vez realizado, podrás enviar tu consulta 
+      y recibirás el enlace de Zoom por correo electrónico.
+    </p>
+
+    <div style="display:flex;gap:16px;margin-top:18px;flex-wrap:wrap;align-items:center">
+
+      <!-- BOTÓN MERCADO PAGO -->
+      <div>
+        <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+          data-preference-id="255770860-77eabc4f-e9b5-49fb-9ffa-60f88b3e0e67"
+          data-source="button">
+        </script>
+      </div>
+
+      <!-- BOTÓN PAYPAL -->
+      <a href="https://paypal.me/invenpan" target="_blank" rel="noopener noreferrer"
+         style="display:inline-flex;align-items:center;gap:8px;
+                background:#ffc439;color:#111;font-weight:700;
+                padding:10px 16px;border-radius:8px;
+                text-decoration:none;transition:0.3s">
+        <span style="font-size:18px">🅿️</span> Pagar con PayPal
+      </a>
+    </div>
+
+    <div style="margin-top:12px;font-size:13px;color:var(--muted)">
+      ✅ Una vez confirmado el pago, podrás enviar tu consulta desde el formulario.
+    </div>
+  </div>
+</section>
+
   </div>
 
 
@@ -145,4 +180,5 @@
   </script>
 </body>
 </html>
+
 
