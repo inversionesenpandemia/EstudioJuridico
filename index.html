@@ -551,22 +551,35 @@
   }, 300); });
 })();
 </script>
-  /* FIX: evitar que el mapa sobresalga del cuadro */
-.map-wrap {
-  position: relative;
-  overflow: hidden;            /* corta lo que sobresalga */
-  border-radius: 8px;          /* mismo radio que tus cards */
-  min-height: 220px;           /* conserva la altura deseada */
+<style>
+/* En pantallas pequeñas: poner el mapa encima del texto de contacto */
+@media (max-width: 768px) {
+  /* Forzamos que el contenedor use flex-column y lo invertimos */
+  #contacto .card {
+    display: flex !important;
+    flex-direction: column-reverse !important; /* mapa arriba, texto abajo */
+    gap: 16px !important;
+  }
+
+  /* Cada columna del grid original ocupa 100% en mobile */
+  #contacto .card > div {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Asegurar que el wrapper del mapa se vea correctamente */
+  #contacto .card .map-wrap,
+  #contacto .card iframe {
+    width: 100% !important;
+    height: 220px !important; /* ajusta si quieres otra altura */
+    border-radius: 8px !important;
+    display: block !important;
+  }
 }
-.map-wrap iframe {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  border-radius: 8px;          /* en caso de que el navegador respete border-radius en iframe */
-}
+</style>
 </body>
 </html>
+
 
 
 
