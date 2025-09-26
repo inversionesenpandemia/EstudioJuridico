@@ -58,6 +58,46 @@
     .testimonial .avatar{width:64px;height:64px;border-radius:999px;object-fit:cover}
   </style>
 </head>
+  <!-- ADAPTADOR MÓVIL (Pegar antes de </body>) -->
+<style>
+/* Forzar visibilidad en móviles, respetando safe-area en iPhone */
+@media (max-width: 1024px) {
+  .whatsapp-float {
+    display: inline-flex !important;            /* asegurar que no esté oculto */
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 2147483647 !important;             /* por encima de todo */
+    right: calc(16px + env(safe-area-inset-right)) !important;
+    bottom: calc(16px + env(safe-area-inset-bottom)) !important;
+    transform: none !important;                 /* evitar transformaciones que lo manden fuera */
+  }
+}
+</style>
+
+<script>
+(function() {
+  // Opcional: asegurar que el elemento está en el DOM y forzar estilos si se carga JS tarde
+  function ensureVisible() {
+    var el = document.getElementById('whatsapp-float');
+    if (!el) return;
+    // Si algún framework ocultó el elemento por JS, forzamos que aparezca
+    el.style.display = 'inline-flex';
+    el.style.visibility = 'visible';
+    el.style.opacity = '1';
+    el.style.pointerEvents = 'auto';
+    el.style.zIndex = '2147483647';
+    // Ajustes para safe-area en iOS
+    el.style.right = 'calc(16px + env(safe-area-inset-right))';
+    el.style.bottom = 'calc(16px + env(safe-area-inset-bottom))';
+  }
+
+  // Ejecutar al cargar y unos instantes después (para SPAs o cargas dinámicas)
+  ensureVisible();
+  window.addEventListener('load', ensureVisible);
+  setTimeout(ensureVisible, 600);
+})();
+</script>
 <body>
   <header>
     <div class="container topbar">
@@ -530,6 +570,7 @@ html body .whatsapp-float { visibility: visible !important; opacity: 1 !importan
 </script>
 </body>
 </html>
+
 
 
 
