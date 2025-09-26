@@ -44,6 +44,17 @@
 
     /* ===== Carousel styles (servicios, galería, testimonios) ===== */
     .carousel{position:relative;overflow:hidden;border-radius:12px}
+    :root { --carousel-left-offset: 20px; } /* ajusta el valor aquí */
+
+.carousel-slide > * {
+  margin-left: var(--carousel-left-offset);
+  box-sizing: border-box;
+}
+
+/* Ajuste menor en móviles */
+@media (max-width: 480px) {
+  :root { --carousel-left-offset: 12px; }
+}
     .carousel-track{display:flex;transition:transform 450ms ease}
     .carousel-slide{min-width:100%;box-sizing:border-box;padding:18px}
     .carousel-controls{position:absolute;top:50%;left:0;right:0;display:flex;justify-content:space-between;transform:translateY(-50%);pointer-events:none}
@@ -636,6 +647,7 @@
 </style>
 </body>
 </html>
+
 
 
 
