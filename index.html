@@ -411,54 +411,97 @@
     }
 
     
-function initCarousel(carouselId){
-  const c = document.getElementById(carouselId);
-  if(!c) return;
-  const track = c.querySelector('.carousel-track');
-  const slides = Array.from(track.children);
-  const prev = c.querySelector('.prev');
-  const next = c.querySelector('.next');
-  const dots = Array.from((c.querySelectorAll('.dot') || []));
-  let idx = 0;
-  const autoplay = c.dataset.autoplay === 'true';
-  const interval = parseInt(c.dataset.interval || 5000, 10);
-  let timer = null;
+/* ===== CAROUSEL GENERIC =====
+       - Works for any container with class 'carousel' and structure:
+         .carousel > .carousel-track > .carousel-slide (multiple)
+       - Controls: .prev, .next as direct children of .carousel
+       - Dots: .carousel-dots .dot (touch controls supported)
+       - Autoplay if data-autoplay="true" and interval in data-interval (ms)
+       - Pause on mouseenter / resume on mouseleave (also when focused)
+    */
+    (function initCarousels(){
+      const carousels = document.querySelectorAll('.carousel');
+      carousels.forEach(init);
 
-  function update(){
-    // centrar slide usando la posición real del slide (offsetLeft)
-    const slide = slides[idx];
-    if (!slide) return;
-    const offset = slide.offsetLeft;
-    track.style.transform = 'translateX(-' + offset + 'px)';
-    dots.forEach((d,i)=> d.classList.toggle('active', i===idx));
-  }
+      function init(carousel) {
+        const track = carousel.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const prevBtn = carousel.querySelector('.prev');
+        const nextBtn = carousel.querySelector('.next');
+        const dotsContainer = carousel.querySelector('.carousel-dots');
+        const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.dot')) : [];
+        let index = 0;
+        let autoplay = carousel.dataset.autoplay === 'true';
+        let interval = parseInt(carousel.dataset.interval || 5000, 10);
+        let timer = null;
+        let isPaused = false;
 
-  function go(i){ idx = (i + slides.length) % slides.length; update(); }
-  function nextSlide(){ go(idx+1); }
-  function prevSlide(){ go(idx-1); }
+        // Set widths (slides are 100% of carousel)
+        function update() {
+          const w = carousel.clientWidth;
+          track.style.transform = `translateX(-${index * w}px)`;
+          dots.forEach((d,i)=> d.classList.toggle('active', i===index));
+        }
 
-  if(next) next.addEventListener('click', ()=>{ nextSlide(); reset(); });
-  if(prev) prev.addEventListener('click', ()=>{ prevSlide(); reset(); });
-  dots.forEach((d,i)=> d.addEventListener('click', ()=>{ go(i); reset(); }));
+        // Next / Prev
+        function goTo(i){
+          index = (i + slides.length) % slides.length;
+          update();
+        }
+        function next(){ goTo(index + 1) }
+        function prev(){ goTo(index - 1) }
 
-  window.addEventListener('resize', update);
+        // Events
+        if(nextBtn) nextBtn.addEventListener('click', ()=>{ next(); resetTimer(); });
+        if(prevBtn) prevBtn.addEventListener('click', ()=>{ prev(); resetTimer(); });
+        dots.forEach((d,i)=> d.addEventListener('click', ()=>{ goTo(i); resetTimer(); }));
 
-  function start(){ if(autoplay){ stop(); timer = setInterval(nextSlide, interval); } }
-  function stop(){ if(timer){ clearInterval(timer); timer=null; } }
-  function reset(){ stop(); start(); }
+        // Resize handling
+        window.addEventListener('resize', update);
 
-  c.addEventListener('mouseenter', ()=>stop());
-  c.addEventListener('mouseleave', ()=>start());
+        // Autoplay
+        function startTimer(){
+          if(!autoplay) return;
+          stopTimer();
+          timer = setInterval(()=>{ if(!isPaused) next(); }, interval);
+        }
+        function stopTimer(){ if(timer){ clearInterval(timer); timer = null; } }
+        function resetTimer(){ stopTimer(); startTimer(); }
 
-  // Asegurar posición correcta cuando imágenes o fuentes carguen
-  window.addEventListener('load', update);
-  // pequeño delay por si hay lazy-load
-  setTimeout(update, 300);
+        // Pause on hover / focus
+        carousel.addEventListener('mouseenter', ()=> isPaused = true);
+        carousel.addEventListener('mouseleave', ()=> isPaused = false);
+        carousel.addEventListener('focusin', ()=> isPaused = true);
+        carousel.addEventListener('focusout', ()=> isPaused = false);
 
-  start();
-  update();
-}
+        // Touch support (swipe)
+        let startX = 0, moveX = 0, isTouch = false;
+        carousel.addEventListener('touchstart', (e)=>{
+          isTouch = true;
+          startX = e.touches[0].clientX;
+        }, {passive:true});
+        carousel.addEventListener('touchmove', (e)=>{
+          if(!isTouch) return;
+          moveX = e.touches[0].clientX - startX;
+        }, {passive:true});
+        carousel.addEventListener('touchend', ()=>{
+          if(!isTouch) return;
+          if(Math.abs(moveX) > 50) { if(moveX < 0) next(); else prev(); }
+          startX = 0; moveX = 0; isTouch = false; resetTimer();
+        });
 
+        // Keyboard: allow Left/Right navigation when carousel is focused
+        carousel.tabIndex = 0;
+        carousel.addEventListener('keydown', (e)=>{
+          if(e.key === 'ArrowRight') { next(); resetTimer(); }
+          if(e.key === 'ArrowLeft') { prev(); resetTimer(); }
+        });
+
+        // Initial render
+        update();
+        startTimer();
+      }
+    })();
 
     // Para el botón "Solicitar turno" del hero: redirijo a la sección de abogados
     document.getElementById('book-now').addEventListener('click', function(){ location.href='#abogados'; });
