@@ -416,11 +416,21 @@
         let isPaused = false;
 
         // Set widths (slides are 100% of carousel)
-        function update() {
-          const w = carousel.clientWidth;
-          track.style.transform = `translateX(-${index * w}px)`;
-          dots.forEach((d,i)=> d.classList.toggle('active', i===index));
-        }
+        function update(){
+  // Ajuste en píxeles: mueve el contenido hacia la derecha (aumenta si quieres más)
+  var leftShift = 20; // <- cambia este valor a los px que quieras (ej. 0, 10, 20...)
+
+  // obtener la slide actual y su posición real dentro del track
+  var slide = slides[idx];
+  if (!slide) return;
+  var offset = slide.offsetLeft - leftShift; // restamos para que el slide aparezca desplazado a la derecha
+
+  // aplicar la transformación
+  track.style.transform = 'translateX(-' + offset + 'px)';
+
+  // actualizar los dots si existen
+  dots.forEach(function(d,i){ d.classList.toggle('active', i===idx); });
+}
 
         // Next / Prev
         function goTo(i){
@@ -647,6 +657,7 @@
 </style>
 </body>
 </html>
+
 
 
 
