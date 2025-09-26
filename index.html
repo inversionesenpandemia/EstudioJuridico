@@ -58,46 +58,6 @@
     .testimonial .avatar{width:64px;height:64px;border-radius:999px;object-fit:cover}
   </style>
 </head>
-  <!-- ADAPTADOR MÓVIL (Pegar antes de </body>) -->
-<style>
-/* Forzar visibilidad en móviles, respetando safe-area en iPhone */
-@media (max-width: 1024px) {
-  .whatsapp-float {
-    display: inline-flex !important;            /* asegurar que no esté oculto */
-    visibility: visible !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    z-index: 2147483647 !important;             /* por encima de todo */
-    right: calc(16px + env(safe-area-inset-right)) !important;
-    bottom: calc(16px + env(safe-area-inset-bottom)) !important;
-    transform: none !important;                 /* evitar transformaciones que lo manden fuera */
-  }
-}
-</style>
-
-<script>
-(function() {
-  // Opcional: asegurar que el elemento está en el DOM y forzar estilos si se carga JS tarde
-  function ensureVisible() {
-    var el = document.getElementById('whatsapp-float');
-    if (!el) return;
-    // Si algún framework ocultó el elemento por JS, forzamos que aparezca
-    el.style.display = 'inline-flex';
-    el.style.visibility = 'visible';
-    el.style.opacity = '1';
-    el.style.pointerEvents = 'auto';
-    el.style.zIndex = '2147483647';
-    // Ajustes para safe-area en iOS
-    el.style.right = 'calc(16px + env(safe-area-inset-right))';
-    el.style.bottom = 'calc(16px + env(safe-area-inset-bottom))';
-  }
-
-  // Ejecutar al cargar y unos instantes después (para SPAs o cargas dinámicas)
-  ensureVisible();
-  window.addEventListener('load', ensureVisible);
-  setTimeout(ensureVisible, 600);
-})();
-</script>
 <body>
   <header>
     <div class="container topbar">
@@ -483,93 +443,117 @@
   </svg>
 </a>
 
-<!-- CSS -->
+<!-- PEGAR ANTES DE </body> -->
+<!-- BOTÓN WHATSAPP: único, móvil-friendly y con fallback -->
 <style>
-/* Asegúrate de que este CSS no sea sobreescrito por reglas más específicas */
+/* Botón flotante (safe-area y prioridad) */
 .whatsapp-float {
-  position: fixed;
-  right: 16px;
+  position: fixed !important;
+  right: calc(16px + env(safe-area-inset-right));
   bottom: calc(16px + env(safe-area-inset-bottom));
   width: 56px;
   height: 56px;
   background: #25D366;
   color: #fff;
   border-radius: 50%;
-  display: inline-flex;
+  display: inline-flex !important;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-  z-index: 99999;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  z-index: 2147483647 !important;
   transition: transform .12s ease, box-shadow .12s ease;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
 .whatsapp-float:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.18); }
-.whatsapp-float svg { display:block; }
+.whatsapp-float svg { display:block; width:24px; height:24px; }
 
-/* Ajustes para móviles pequeños */
-@media (max-width: 480px) {
-  .whatsapp-float { width: 64px; height: 64px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); }
+/* Ajustes para pantallas pequeñas */
+@media (max-width:480px) {
+  .whatsapp-float { width:64px; height:64px; right: calc(12px + env(safe-area-inset-right)); bottom: calc(12px + env(safe-area-inset-bottom)); }
 }
-
-/* Forzar visibilidad si alguna regla general lo oculta */
-html body .whatsapp-float { visibility: visible !important; opacity: 1 !important; display: inline-flex !important; }
 </style>
 
-<!-- JavaScript -->
 <script>
-(function() {
-  // Voy a asegurame de: 1) tener el elemento, 2) no colocarlo dentro de un contenedor transform, 3) dar fallback si la app no abre.
-  var phoneNumber = "5491158084238"; // reemplaza por tu número
-  var message = "Hola! Quisiera información sobre sus servicios."; // mensaje por defecto
+(function(){
+  // --- CONFIG: cambia solo el phone si quieres ---
+  var phoneNumber = "5491158084238"; // <-- reemplaza si hace falta (formato internacional sin + ni espacios)
+  var message = "Hola! Quisiera información sobre sus servicios.";
+  var encoded = encodeURIComponent(message);
+  var waMeUrl = "https://wa.me/" + phoneNumber + "?text=" + encoded;
+  var appUrl = "whatsapp://send?phone=" + phoneNumber + "&text=" + encoded;
+  // -----------------------------------------------
 
-  var encodedMessage = encodeURIComponent(message);
-  var waMeUrl = "https://wa.me/" + phoneNumber + "?text=" + encodedMessage;
-  var appUrl = "whatsapp://send?phone=" + phoneNumber + "&text=" + encodedMessage;
-  var anchor = document.getElementById("whatsapp-float");
+  // Si existen múltiples #whatsapp-float, dejar solo el primero y moverlo a body
+  var existing = document.querySelectorAll('#whatsapp-float');
+  var anchor;
 
-  // Detección simple de mobile
+  if (existing.length === 0) {
+    // Crear el elemento si no existe
+    anchor = document.createElement('a');
+    anchor.id = 'whatsapp-float';
+    anchor.className = 'whatsapp-float';
+    anchor.setAttribute('aria-label', 'Abrir chat de WhatsApp');
+    anchor.setAttribute('title', 'Escríbenos por WhatsApp');
+    anchor.setAttribute('target', '_blank');
+    anchor.setAttribute('rel', 'noopener noreferrer');
+    anchor.href = waMeUrl;
+    anchor.innerHTML = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.52 3.48C18.17 1.13 15.03 0 11.65 0 5.04 0 .01 5.04 .01 11.63c0 2.05.53 4.05 1.54 5.81L0 24l6.82-1.77c1.64.9 3.48 1.36 5.33 1.36 6.61 0 11.64-5.04 11.64-11.63 0-3.38-1.13-6.52-3.01-8.78z" fill="#25D366"/><path d="M17.01 14.43c-.29-.15-1.71-.84-1.97-.94-.26-.11-.45-.15-.64.15-.19.29-.74.94-.9 1.13-.16.19-.32.21-.61.07-.29-.15-1.2-.44-2.29-1.39-.85-.75-1.43-1.69-1.6-1.98-.16-.29-.02-.45.13-.6.13-.12.29-.33.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.64-1.53-.88-2.1-.23-.55-.46-.47-.64-.48l-.55-.01c-.19 0-.5.07-.76.36-.26.28-1 1-1 2.45 0 1.45 1.03 2.86 1.17 3.06.14.2 2.02 3.28 4.9 4.6 2.85 1.31 2.85.87 3.36.81.5-.06 1.71-.7 1.95-1.38.24-.69.24-1.28.17-1.38-.07-.1-.26-.15-.55-.3z" fill="#fff"/></svg>';
+    document.body.appendChild(anchor);
+  } else {
+    // Tomar el primero
+    anchor = existing[0];
+    // moverlo al body (para evitar problemas con contenedores transform/overflow)
+    if (anchor.parentNode !== document.body) {
+      document.body.appendChild(anchor);
+    }
+    // eliminar duplicados
+    for (var i = 1; i < existing.length; i++) {
+      try { existing[i].remove(); } catch(e) {}
+    }
+    // asegurar href y atributos
+    anchor.href = waMeUrl;
+    anchor.setAttribute('target', '_blank');
+    anchor.setAttribute('rel', 'noopener noreferrer');
+  }
+
+  // Forzar estilos inline por si el tema los sobreescribe
+  try {
+    var s = anchor.style;
+    s.display = 'inline-flex'; s.visibility = 'visible'; s.opacity = '1'; s.pointerEvents = 'auto';
+    s.zIndex = '2147483647'; s.right = 'calc(16px + env(safe-area-inset-right))'; s.bottom = 'calc(16px + env(safe-area-inset-bottom))';
+  } catch(e){}
+
+  // Detectar mobile
   function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
   }
 
-  if (!anchor) {
-    // Si no existe el anchor, nada que hacer — avisar en consola para debugging
-    console.warn("No se encontró el elemento #whatsapp-float. Añádelo al body (fuera de contenedores con transform).");
-    return;
-  }
-
-  // Por defecto usamos wa.me (útil en escritorio)
-  anchor.setAttribute("href", waMeUrl);
-  anchor.setAttribute("target", "_blank");
-  anchor.setAttribute("rel", "noopener noreferrer");
-
-  anchor.addEventListener("click", function(e) {
-    if (!isMobile()) {
-      // Desktop: abrimos wa.me en nueva pestaña (ya puesto en href)
-      return;
-    }
-    // Mobile: intentamos abrir la app nativa; si no se abre, fallback a wa.me
+  // Click behavior: intentar abrir app en móvil, fallback a wa.me
+  anchor.addEventListener('click', function(e){
+    if (!isMobile()) return; // en desktop dejamos el href normal (wa.me)
     e.preventDefault();
-
     var start = Date.now();
-    // Intento principal: cambiar la ubicación al esquema whatsapp://
-    // En la mayoría de navegadores móviles esto abre la app si está instalada.
+    // intento app
     window.location.href = appUrl;
-
-    // Fallback: si tras X ms seguimos en la página abrimos wa.me
-    setTimeout(function() {
-      // Si el tiempo transcurrido es corto, asumimos que la app no abrió y redirigimos a wa.me
+    // fallback a wa.me si no se abrió la app
+    setTimeout(function(){
       if (Date.now() - start < 2000) {
         window.location.href = waMeUrl;
       }
     }, 1500);
-  }, {passive: false});
+  }, { passive: false });
+
+  // Si el botón se esconde por alguna regla CSS después de cargar (SPAs), re-aplicar
+  window.addEventListener('load', function(){ setTimeout(function(){
+    try { anchor.style.display = 'inline-flex'; anchor.style.visibility = 'visible'; } catch(e){} 
+  }, 300); });
 })();
 </script>
 </body>
 </html>
+
 
 
 
