@@ -5,8 +5,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Estudio Jurídico - Atención profesional</title>
+  <title>Estudio Integral - Atención profesional</title>
   <meta name="description" content="Estudio jurídico. Consultas online, turnos y pagos digitales. Atención en causas civiles, penales y laborales.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     :root{--accent:#0b5cff;--dark:#0b1b2b;--muted:#6b7280;--card-bg:#ffffff;--radius:12px;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color-scheme:light}
     *{box-sizing:border-box}
@@ -22,6 +23,28 @@
     .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:34px 0}
     .hero h2{font-size:28px;margin:0 0 10px}
     .hero p{margin:0 0 18px;color:var(--muted)}
+    /* LOGO: estilos */
+.logo-desktop {
+  display: block;            /* visible en pantallas grandes */
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 12px;
+}
+.logo-desktop1 {
+  display: none;            /* visible en pantallas grandes */
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 12px;
+  margin-left: 80px;
+}
+
+/* En móviles mostrar el logo fijo y ocultar la versión dentro del aside si preferís */
+@media (max-width: 600px) {
+  .logo-desktop { display: none; }
+  .logo-mobile { display: block; }
+  .logo-desktop1 { display: block; }
+}
+
     .card{background:var(--card-bg);border-radius:var(--radius);padding:18px;box-shadow:0 6px 18px rgba(20,30,60,0.06)}
     .services{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
     .service h3{margin:0 0 8px}
@@ -81,7 +104,7 @@
           <path d="M6 18V12l6-6 6 6v6" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
         <div>
-          <h1>Estudio Jurídico Aquino & Asociados</h1>
+          <h1>Estudio Integral Aquino & Asociados</h1>
           <div style="font-size:12px;color:rgba(255,255,255,0.9)">Especialistas en civil, penal, laborales y migraciones</div>
         </div>
       </div>
@@ -102,27 +125,23 @@
   <main class="container">
     <section class="hero">
   <div>
-    <h2>Asesoría legal profesional — rápida, confiable y accesible</h2>
+    <h2>Estudio Integral - Consultora</h2>
+     <!-- Logo para desktop (queda justo arriba del contacto rápido) -->
+    <img src="/img/logoju.png" alt="Logo Estudio Jurídico" class="logo-desktop1">
     <p>
       En nuestro estudio jurídico ofrecemos <strong>soluciones legales a tu medida</strong>, con un enfoque en la 
-      <strong>tranquilidad, la confianza y la seguridad</strong> que cada cliente merece. 
-      Desde la primera <strong>consulta por video-llamada</strong> recibirás atención directa de un abogado especializado, 
-      quien analizará tu situación, resolverá tus dudas y diseñará una estrategia clara para tu caso. 
+      <strong>tranquilidad, la confianza y la seguridad</strong> que cada cliente merece.  
     </p>
-
     <p>
-      Nos destacamos por brindar un <strong>seguimiento cercano y transparente</strong>, manteniéndote informado en cada 
-      etapa de tu trámite o proceso. Además, garantizamos <strong>representación legal eficaz</strong> en instancias administrativas 
-      y judiciales, defendiendo siempre tus derechos.
-    </p>
-
+      Si sos extranjero podes consultar por <strong>visa, autorización o permiso de ingreso</strong>.</p>
+    <p>Condiciones paara radicarte <strong>inversionista, reunificación familiar, por trabajo o rentista</strong></p>
     <p>
-      Con la facilidad de nuestros <strong>canales de pago digitales</strong> (MercadoPago, PayPal o tarjeta de crédito), 
-      podés <strong>reservar tu consulta online</strong> de manera rápida y segura. 
-      Tu tiempo vale, por eso simplificamos el proceso para que accedas a la asistencia que necesitás 
-      sin demoras ni trámites presenciales.
-    </p>
-
+      <strong>Derecho Societario</strong> Ofrecemos el proceso completo de Constitución de sociedades 
+      <strong>(S.A.S., S.A., S.R.L., entre otras)</strong> Asegurándote un trabajo completo </p>
+    <p>Asimismo te ofrecemos asistencia intgral, que abarca desde 
+      <strong>la inscripción hasta la apertura de cuentas bancarias, cuit y mantenimiento de la empresa.</strong></p>
+    <p>
+      <strong>Realizamos autorización de empreas extranjeras</strong> incorporándola en Argentina.</p>
     <div class="card">
       <div class="stack">
         <div class="flex" style="justify-content:space-between;align-items:center">
@@ -141,6 +160,11 @@
         </div>
       </div>
     </div>
+    <div style="margin-top: 15px; display: flex; align-items: center; gap: 20px;">
+      <span class="muted">Medios de pago habilitados:</span>
+      <img src="img/mercadopago.png" alt="Mercado Pago" style="height:40px;">
+      <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal" style="height:40px;">
+    </div>
 
     <div style="margin-top:20px">
       <h3>¿Por qué elegirnos?</h3>
@@ -155,6 +179,8 @@
   </div>
 
       <aside class="card">
+         <!-- Logo para desktop (queda justo arriba del contacto rápido) -->
+    <img src="/img/logoju.png" alt="Logo Estudio Jurídico" class="logo-desktop">
   <h3>Contacto rápido</h3>
   <p class="muted">
     Tel: +54 9 11 5808-4238<br>
@@ -182,41 +208,59 @@
 
     <!-- ====== SERVICIOS (mantengo tu contenido pero lo envuelvo en un carrusel) ====== -->
     <section id="servicios">
-      <h3>Servicios</h3>
+  <h3>Servicios</h3>
 
-      <!-- Mantengo las tarjetas originales, pero las agrupo en slides para el carrusel -->
-      <div class="card carousel" id="services-carousel" data-autoplay="true" data-interval="5500" aria-roledescription="carrusel de servicios">
-        <div class="carousel-track">
-          <!-- Slide A: las mismas 3 tarjetas que tenías -->
-          <div class="carousel-slide">
-            <div class="services" id="services-original">
-              <div class="card service"><h3>Derecho Civil</h3><p>Contratos, sucesiones y responsabilidad civil.</p></div>
-              <div class="card service"><h3>Derecho Penal</h3><p>Defensa penal y asesoramiento en causas complejas.</p></div>
-              <div class="card service"><h3>Laboral</h3><p>Despidos, indemnizaciones y negociaciones colectivas.</p></div>
-            </div>
+  <div class="card carousel" id="services-carousel" data-autoplay="true" data-interval="5500" aria-roledescription="carrusel de servicios">
+    <div class="carousel-track">
+      <!-- Slide A -->
+      <div class="carousel-slide">
+        <div class="services" id="services-original">
+          <div class="card service">
+            <h3><i class="fas fa-file-contract"></i> Derecho Civil</h3>
+            <p>Contratos, sucesiones y responsabilidad civil.</p>
           </div>
-
-          <!-- Slide B: puedes duplicar u agregar más servicios aquí (no toco tu contenido original) -->
-          <div class="carousel-slide">
-            <div class="services">
-              <div class="card service"><h3>Migraciones</h3><p>Visas, residencia, apelaciones migratorias y asesoramiento a empresas.</p></div>
-              <div class="card service"><h3>Previsional</h3><p>Jubilaciones, recursos administrativos y juicios previsionales.</p></div>
-              <div class="card service"><h3>Asesoría Corporativa</h3><p> Asesoría Empresarial, constitución de sociedades,inversiones, contratos comerciales y compliance.</p></div>
-            </div>
+          <div class="card service">
+            <h3><i class="fas fa-gavel"></i> Derecho Penal</h3>
+            <p>Defensa penal y asesoramiento en causas complejas.</p>
           </div>
-        </div>
-
-        <div class="carousel-controls">
-          <button class="prev" aria-label="Anterior">◀</button>
-          <button class="next" aria-label="Siguiente">▶</button>
-        </div>
-
-        <div class="carousel-dots" aria-hidden="false">
-          <button class="dot active" data-index="0"></button>
-          <button class="dot" data-index="1"></button>
+          <div class="card service">
+            <h3><i class="fas fa-briefcase"></i> Derecho Laboral</h3>
+            <p>Despidos, indemnizaciones y negociaciones colectivas.</p>
+          </div>
         </div>
       </div>
-    </section>
+
+      <!-- Slide B -->
+      <div class="carousel-slide">
+        <div class="services">
+          <div class="card service">
+            <h3><i class="fas fa-passport"></i> Migraciones</h3>
+            <p>Visas, residencia, apelaciones migratorias y asesoramiento a empresas.</p>
+          </div>
+          <div class="card service">
+            <h3><i class="fas fa-user-clock"></i> Previsional</h3>
+            <p>Jubilaciones, recursos administrativos y juicios previsionales.</p>
+          </div>
+          <div class="card service">
+            <h3><i class="fas fa-building"></i> Asesoría Corporativa</h3>
+            <p>Asesoría empresarial, constitución de sociedades, inversiones, contratos comerciales y más.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-controls">
+      <button class="prev" aria-label="Anterior">◀</button>
+      <button class="next" aria-label="Siguiente">▶</button>
+    </div>
+
+    <div class="carousel-dots" aria-hidden="false">
+      <button class="dot active" data-index="0"></button>
+      <button class="dot" data-index="1"></button>
+    </div>
+  </div>
+</section>
+
 
     <!-- ====== EQUIPO (sin cambios de contenido, solo hago que 'Pedir consulta' redirija al perfil) ====== -->
     <section id="abogados">
@@ -255,9 +299,10 @@
         <!-- Abogado 3 -->
         <div class="card lawyer" data-lawyer-id="3">
           <img class="avatar" src="img/avatarhombre.jpg" alt="Abogado Laboral">
-          <h4>Dr. Martín López</h4>
-          <div class="muted">MP 3455465657567</div>
-          <div class="muted">Especialista en derecho laboral</div>
+          <h4>Dr. Gustavo Ramón Cejas</h4>
+          <div class="muted">M.P. 6745 (Salta)</div>
+          <div class="muted">M.F. Tomo 144 Folio 99</div>
+          <div class="muted">Especialista en Civil (Familia) derecho laboral (ART, Daños y Perjuicios)</div>
           <p style="margin-top:10px">Despidos, demandas laborales, negociación y representación en juzgados.</p>
           <div style="margin-top:10px"><span class="price">Precio consulta: $5.500</span></div>
           <div style="margin-top:10px;display:flex;gap:8px">
@@ -269,26 +314,44 @@
 
     <!-- ====== SOLICITAR CONSULTA ====== -->
 <section id="consultas">
-  <h3>Solicitar consulta</h3>
+  <h3>¿Querés invertir en Argetina?</h3>
   <div class="card">
-    <p class="muted">
-      Nuestro estudio jurídico te brinda la posibilidad de realizar <strong>consultas en línea</strong> de forma rápida, segura y confiable.  
-      Al hacer clic en <em>"Pedir consulta"</em> dentro del perfil del abogado, accederás a un formulario personalizado donde podrás detallar tu caso, enviar tu consulta y, en caso de corresponder, realizar el pago en el mismo momento.
+    <p class="">
+      Nuestro estudio jurídico te brinda <strong>asesoramiento</strong> si querés invertir de forma rápida, segura y confiable.
     </p>
-    <p class="muted">
+    <p class="">
       Contamos con un equipo de profesionales especializados en distintas áreas del derecho, listos para ofrecerte una <strong>atención personalizada</strong>, con respuestas claras y adaptadas a tus necesidades.  
       Nos comprometemos a brindarte un servicio transparente, ágil y con el respaldo de años de experiencia.
     </p>
-    <p class="muted">
-      Tu tranquilidad es lo más importante: trabajamos con plataformas de pago seguras y reconocidas a nivel internacional, para que gestiones tus consultas con total confianza.
-    </p>
+    <section class="litio-info" style="padding:40px 20px;max-width:900px;margin:auto">
+  <h2>¿Por qué es rentable invertir en litio en Argentina?</h2>
+  <p>
+    Argentina forma parte del <strong>“Triángulo del Litio”</strong>, junto a Bolivia y Chile, que concentra el <strong>46% de las reservas mundiales</strong> de este mineral estratégico.
+  </p>
+  <ul>
+    <li>🔋 <strong>Demanda global en crecimiento</strong>: esencial para baterías de vehículos eléctricos y dispositivos electrónicos.</li>
+    <li>🌍 <strong>Transición energética</strong>: el mundo avanza hacia energías limpias, aumentando la necesidad de litio.</li>
+    <li>📉 <strong>Precios bajos como oportunidad</strong>: ideal para posicionarse a largo plazo.</li>
+    <li>🏗️ <strong>Infraestructura en expansión</strong>: provincias como Salta, Jujuy y Catamarca están desarrollando capacidades locales.</li>
+    <li>🤝 <strong>Apoyo institucional</strong>: informes como el de PwC destacan el potencial si se garantiza estabilidad jurídica y sostenibilidad.</li>
+  </ul>
 
-    <div style="margin-top: 15px; display: flex; align-items: center; gap: 20px;">
-      <span class="muted">Medios de pago habilitados:</span>
-      <img src="img/mercadopago.png" alt="Mercado Pago" style="height:40px;">
-      <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal" style="height:40px;">
-    </div>
-  </div>
+  <hr style="margin:30px 0;border:none;border-top:1px solid #ccc">
+
+  <h2>¿Qué es el litio y para qué sirve?</h2>
+  <p>
+    El litio es un <strong>metal alcalino blanco, muy ligero y altamente reactivo</strong>, extraído principalmente de <strong>salares de altura</strong> como los de la Puna argentina.
+  </p>
+  <h3>Usos principales del litio:</h3>
+  <ul>
+    <li>🔋 <strong>Baterías recargables</strong>: celulares, laptops, autos eléctricos y sistemas solares.</li>
+    <li>🧠 <strong>Psicofármacos</strong>: tratamiento de trastornos bipolares y estabilización del ánimo.</li>
+    <li>🛠️ <strong>Industria aeroespacial</strong>: aleaciones para aviones y trenes de alta velocidad.</li>
+    <li>🧼 <strong>Lubricantes y secantes</strong>: en sistemas industriales y de climatización.</li>
+    <li>🚀 <strong>Aplicaciones nucleares y espaciales</strong>: depurador de CO₂ en submarinos y naves espaciales.</li>
+  </ul>
+</section>
+
 </section>
 
     
@@ -751,6 +814,7 @@
 </style>
 </body>
 </html>
+
 
 
 
