@@ -90,6 +90,23 @@
     .gallery-img{width:100%;height:260px;object-fit:cover;border-radius:10px}
     .testimonial{display:flex;gap:12px;align-items:flex-start}
     .testimonial .avatar{width:64px;height:64px;border-radius:999px;object-fit:cover}
+
+    /* Mostrar toggle en pantallas pequeñas y adaptar layout */
+  @media (max-width: 780px) {
+    .container.topbar { display:flex;align-items:center;gap:10px;flex-wrap:nowrap; }
+    .brand { flex: 1 1 auto; }
+    /* ocultar la nav horizontal y mostrar el toggle */
+    #nav-list { display:none !important; }
+    .menu-toggle { display:inline-block !important; }
+    /* mobile menu: ocupa ancho reducido y se posiciona debajo del header */
+    #mobile-menu { right:12px; left:auto; width:260px; }
+    /* make translate button smaller on mobile */
+    .translate-btn { padding:6px 8px;font-size:14px }
+    .brand-logo { width:48px; }
+  }
+  @media (min-width: 781px) {
+    #mobile-menu { display:none !important; }
+  }
   </style>
   <!-- Agregar esto en el <head> de tu página -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -108,87 +125,277 @@
 <body>
   <header>
     <div class="container topbar">
-      <div class="brand">
-        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" aria-hidden>
-          <rect width="24" height="24" rx="6" fill="white" opacity="0.06"></rect>
-          <path d="M6 18V12l6-6 6 6v6" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-        <div>
-          <h1>Estudio Integral Aquino & Asociados</h1>
-          <div style="font-size:12px;color:rgba(255,255,255,0.9)">Especialistas en civil, previsional, laboral y migraciones</div>
-        </div>
-      </div>
-      <div id="google_translate_element"></div>
-      <nav aria-label="Menú principal">
-        <a href="#servicios">Servicios</a>
-        <a href="#abogados">Abogados</a>
-        <a href="#galeria">Galería</a>
-        <a href="#opiniones">Opiniones</a>
-        <a href="#pagos">Pagos</a>
-        <a href="#contacto" class="cta">Contacto</a>
-      </nav>
+  <div class="brand" style="display:flex;align-items:center;gap:12px;">
+    <!-- Logo: reemplaza la ruta por tu logo (SVG/PNG). -->
+    <a href="index.html" class="brand-logo-link" aria-label="Inicio - Estudio Integral">
+      <img src="/img/logoju.png" alt="Estudio Integral Aquino & Asociados" class="brand-logo" style="width:56px;height:auto;border-radius:6px;display:block;">
+    </a>
 
-      <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" style="display:none;background:transparent;border:none;color:white;font-weight:700">☰</button>
+    <div>
+      <h1 style="font-size:18px;margin:0">Estudio Integral Aquino & Asociados</h1>
+      <div style="font-size:12px;color:rgba(255,255,255,0.9)">Especialistas en civil, previsional, laboral y migraciones</div>
     </div>
+  </div>
+
+  <!-- Botón de traducción: contiene el widget de Google Translate (elemento original) -->
+  <div style="display:flex;align-items:center;gap:12px">
+    <button id="translate-btn" class="translate-btn" aria-expanded="false" aria-controls="google_translate_element" type="button" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.12);color:white;padding:8px 10px;border-radius:10px;cursor:pointer;font-weight:600">
+      <span aria-hidden style="font-size:16px">🌐</span>
+      <span class="translate-label">Idioma</span>
+    </button>
+
+    <!-- Este div es el que ya usabas para Google Translate. Queda dentro del botón visualmente
+         pero lo mostramos/ocultamos con JS. Mantengo el id original para compatibilidad con tu script. -->
+    <div id="google_translate_element" style="display:none;position:absolute;z-index:9999"></div>
+  </div>
+
+  <!-- Navegación: lista semántica para mejor accesibilidad -->
+  <nav id="main-nav" aria-label="Menú principal" style="margin-left:12px;">
+    <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" type="button" style="display:none;background:transparent;border:none;color:white;font-weight:700;font-size:20px;padding:6px 8px">☰</button>
+
+    <ul id="nav-list" class="nav-list" style="display:flex;gap:16px;list-style:none;margin:0;padding:0;align-items:center">
+      <li><a href="#servicios" style="color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600">Servicios</a></li>
+      <li><a href="#abogados" style="color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600">Abogados</a></li>
+      <li><a href="#galeria" style="color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600">Galería</a></li>
+      <li><a href="#opiniones" style="color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600">Opiniones</a></li>
+      <li><a href="#pagos" style="color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600">Pagos</a></li>
+      <li><a href="#contacto" class="cta" style="background:white;color:var(--accent);padding:8px 12px;border-radius:10px;font-weight:700;text-decoration:none">Contacto</a></li>
+    </ul>
+
+    <!-- versión móvil: menú desplegable (oculto por defecto) -->
+    <div id="mobile-menu" class="mobile-menu" hidden style="display:none;position:absolute;top:68px;right:20px;background:white;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.12);overflow:hidden">
+      <ul style="list-style:none;margin:0;padding:10px;display:flex;flex-direction:column;gap:6px;">
+        <li><a href="#servicios" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block">Servicios</a></li>
+        <li><a href="#abogados" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block">Abogados</a></li>
+        <li><a href="#galeria" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block">Galería</a></li>
+        <li><a href="#opiniones" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block">Opiniones</a></li>
+        <li><a href="#pagos" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block">Pagos</a></li>
+        <li><a href="#contacto" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block;font-weight:700">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
   </header>
 
   <main class="container">
-    <section class="hero">
-  <div style="text-align: justify;">
-    <h2>Estudio Integral - Consultora</h2>
-     <!-- Logo para desktop (queda justo arriba del contacto rápido) -->
-    <img src="img/logoju.png" alt="Logo Estudio Jurídico" class="logo-desktop1">
-    <p>
-      En nuestro estudio jurídico ofrecemos <strong>soluciones legales a tu medida</strong>, con un enfoque en la 
-      <strong>tranquilidad, la confianza y la seguridad</strong> que cada cliente merece.  
-    </p>
-    <p><strong>¡ Asegurá  tu Futuro con Nuestro Asesoramiento Legal Previsional!</strong>   Eres un trabajador rural, de la construcción  o docente ? <strong>¡ ésta es tu oportunidad !</strong>
-    </p>
-    <p><strong>Análisis :</strong> Evaluamos tu situación laboral y previsional  para ofrecerte una solución a tu medida.
-    </p>
-    <p><strong>Orientación Integral:</strong> Te guiamos en el proceso de obtención  de tus derechos previsionales, asegurando que conozcas todas las opciones disponibles.
-    </p>
-    <p><strong>Tramitacion Efectiva :</strong>  Nos encargamos de gestionar tu caso para que  puedas acceder a tu  jubilacion sin complicaciones.
-    </p>
-    <p>
-      Si sos extranjero podes consultar por <strong>visa, autorización o permiso de ingreso</strong>.</p>
-    <p>Condiciones para radicarte <strong>inversionista, reunificación familiar, por trabajo o rentistas.</strong></p>
-    <p>
-      <strong>Derecho Societario</strong> Ofrecemos el proceso completo de Constitución de sociedades 
-      <strong>(S.A.S., S.A., S.R.L., entre otras)</strong> Asegurándote un trabajo completo. </p>
-    <p>Asimismo te ofrecemos asistencia integral, que abarca desde 
-      <strong>la inscripción hasta la apertura de cuentas bancarias, cuit y mantenimiento de la empresa.</strong></p>
-    <p>
-      <strong>Realizamos autorización de empresas extranjeras</strong> incorporándola en Argentina.</p>
-          </div>
-      <aside class="card">
-         <!-- Logo para desktop (queda justo arriba del contacto rápido) -->
-    <img src="img/logoju.png" alt="Logo Estudio Jurídico" class="logo-desktop">
-  <h3>Contacto rápido</h3>
-  <p class="muted">
-    <strong>Dra. Flavia Gimenez Singh</strong> Tel: +54 9 381 415-6766<br>
-    <strong>Dra. Liliana Aquino</strong> Tel: +54 9 11 5808-4238<br>
-    <strong>Dr. Gustavo Ramón Cejas</strong> Tel: +54 9 11 3152-0762<br>
-    Email: dralilianaaquino@gmail.com
-  </p>
-  <hr style="margin:12px 0;border:none;border-top:1px solid #eef2f8">
-  <div>
-    <strong>Horario</strong>
-    <p class="muted" style="margin:6px 0">Lunes a Viernes — 9:00 a 18:00</p>
-  </div>
 
-  <!-- Botón WhatsApp -->
-  <div style="margin-top:15px">
-    <a href="https://wa.me/5491158084238" target="_blank" 
-       style="display:inline-flex;align-items:center;gap:8px;
-              background:#25D366;color:white;padding:10px 14px;
-              border-radius:8px;text-decoration:none;font-weight:600">
-      <i class="fab fa-whatsapp" style="font-size:20px"></i> 
-      Chatear por WhatsApp
-    </a>
+<!-- Carrusel "Sobre nosotros" — reemplaza las rutas de imagen por las tuyas -->
+<section id="about-section" class="card" aria-labelledby="about-title" style="margin-top:18px;">
+  <h2 id="about-title">Estudio Integral - Consultora</h2>
+
+  <div id="about-carousel" class="about-carousel" data-autoplay="true" data-interval="6000" aria-roledescription="carrusel de tarjetas sobre nosotros">
+    <div class="about-track">
+      <!-- Slide 1 -->
+      <article class="about-slide" aria-label="Soluciones legales a tu medida">
+        <img class="about-img" loading="lazy" src="img/p1.png" alt="Asesoramiento legal a tu medida">
+        <div class="about-body">
+          <h3>Soluciones legales a tu medida</h3>
+          <p>En nuestro estudio jurídico ofrecemos <strong>soluciones legales a tu medida</strong>, con un enfoque en la <strong>tranquilidad, la confianza y la seguridad</strong> que cada cliente merece.</p>
+        </div>
+      </article>
+
+      <!-- Slide 2 -->
+      <article class="about-slide" aria-label="Soluciones legales a tu medida">
+        <img class="about-img" loading="lazy" src="img/p2.png" alt="Asesoramiento previsional">
+        <div class="about-body">
+          <h3>Asegurá tu futuro</h3>
+          <p><strong>¡Asegurá tu Futuro con Nuestro Asesoramiento Legal Previsional!</strong> Eres un trabajador rural, de la construcción o docente? <strong>¡Ésta es tu oportunidad!</strong></p>
+        </div>
+      </article>
+
+      <!-- Slide 3 -->
+      <article class="about-slide" aria-label="Soluciones legales a tu medida">
+        <img class="about-img" loading="lazy" src="img/p3.png" alt="Análisis del caso">
+        <div class="about-body">
+          <h3>Análisis personalizado</h3>
+          <p><strong>Análisis :</strong> Evaluamos tu situación laboral y previsional para ofrecerte una solución a tu medida.</p>
+        </div>
+      </article>
+
+      <!-- Slide 4 -->
+      <article class="about-slide" aria-label="Soluciones legales a tu medida">
+        <img class="about-img" loading="lazy" src="img/p4.png" alt="Orientación integral">
+        <div class="about-body">
+          <h3>Orientación integral</h3>
+          <p><strong>Orientación Integral:</strong> Te guiamos en el proceso de obtención de tus derechos previsionales, asegurando que conozcas todas las opciones disponibles.</p>
+        </div>
+      </article>
+
+      <!-- Slide 5 -->
+      <article class="about-slide" aria-label="Soluciones legales a tu medida">
+        <img class="about-img" loading="lazy" src="img/p5.png" alt="Tramitación efectiva">
+        <div class="about-body">
+          <h3>Tramitación efectiva</h3>
+          <p><strong>Tramitación Efectiva :</strong> Nos encargamos de gestionar tu caso para que puedas acceder a tu jubilación sin complicaciones.</p>
+        </div>
+      </article>
+
+      <!-- Slide 6 -->
+      <article class="about-slide" aria-label="Soluciones legales a tu medida">
+        <img class="about-img" loading="lazy" src="img/p6.png" alt="Migraciones y visados">
+        <div class="about-body">
+          <h3>Migraciones</h3>
+          <p>Si sos extranjero podés consultar por <strong>visa, autorización o permiso de ingreso</strong>. Condiciones para radicarse como <strong>inversionista, reunificación familiar, por trabajo o rentistas.</strong></p>
+        </div>
+      </article>
+
+      <!-- Slide 7 -->
+      <article class="about-slide" aria-label="Soluciones legales a tu medida">
+        <img class="about-img" loading="lazy" src="img/p7.png" alt="Derecho societario">
+        <div class="about-body">
+          <h3>Derecho societario</h3>
+          <p><strong>Derecho Societario</strong> Ofrecemos el proceso completo de Constitución de sociedades <strong>(S.A.S., S.A., S.R.L., entre otras)</strong> asegurando un trabajo completo.</p>
+        </div>
+      </article>
+
+      <!-- Slide 8 -->
+      <article class="about-slide" aria-label="Soluciones legales a tu medida">
+        <img class="about-img" loading="lazy" src="img/p8.png" alt="Apertura de empresa y CUIT">
+        <div class="about-body">
+          <h3>Asistencia integral empresarial</h3>
+          <p>Asistencia integral desde la inscripción hasta la apertura de cuentas bancarias, CUIT y mantenimiento de la empresa.</p>
+        </div>
+      </article>
+
+      <!-- Slide 9 -->
+      <article class="about-slide" aria-label="Soluciones legales a tu medida">
+        <img class="about-img" loading="lazy" src="img/p9.png" alt="Autorización de empresas extranjeras">
+        <div class="about-body">
+          <h3>Empresas extranjeras</h3>
+          <p><strong>Realizamos autorización de empresas extranjeras</strong> incorporándola en Argentina.</p>
+        </div>
+      </article>
+    </div>
+
+    <!-- Controles -->
+    <div class="about-controls">
+      <button class="about-prev" aria-label="Anterior">◀</button>
+      <button class="about-next" aria-label="Siguiente">▶</button>
+    </div>
+
+    <div class="about-dots" role="tablist" aria-label="Seleccionar slide">
+      <!-- Se generan dinámicamente si prefieres; incluí 9 por defecto -->
+      <button class="about-dot active" data-index="0" aria-label="Slide 1"></button>
+      <button class="about-dot" data-index="1" aria-label="Slide 2"></button>
+      <button class="about-dot" data-index="2" aria-label="Slide 3"></button>
+      <button class="about-dot" data-index="3" aria-label="Slide 4"></button>
+      <button class="about-dot" data-index="4" aria-label="Slide 5"></button>
+      <button class="about-dot" data-index="5" aria-label="Slide 6"></button>
+      <button class="about-dot" data-index="6" aria-label="Slide 7"></button>
+      <button class="about-dot" data-index="7" aria-label="Slide 8"></button>
+      <button class="about-dot" data-index="8" aria-label="Slide 9"></button>
+    </div>
   </div>
-</aside>
-    </section >
+</section>
+
+<style>
+/* Overlay: imágenes ocupan todo el slide y texto encima */
+.about-carousel{position:relative;overflow:hidden;border-radius:10px}
+.about-track{display:flex;transition:transform 420ms cubic-bezier(.22,.95,.28,1);will-change:transform}
+.about-slide{min-width:100%;box-sizing:border-box;padding:0;position:relative;height:360px;display:block;border-radius:10px;overflow:hidden}
+
+/* imagen como capa de fondo que cubre todo */
+.about-slide img.about-img{
+  position:absolute;
+  inset:0; /* top:0; right:0; bottom:0; left:0; */
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  filter:contrast(1.02);
+  transform-origin:center;
+}
+
+/* capa overlay (degradado para legibilidad) */
+.about-slide::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, rgba(8,20,40,0.10) 10%, rgba(8,20,40,0.45) 70%);
+  pointer-events:none;
+}
+
+/* contenedor de texto encima */
+.about-body{
+  position:absolute;
+  left:20px;
+  right:20px;
+  bottom:20px;
+  z-index:3;
+  color:#fff;
+  text-shadow: 0 6px 18px rgba(3,10,20,0.45);
+  max-width:calc(100% - 40px);
+  background: linear-gradient(0deg, rgba(0,0,0,0.18), rgba(0,0,0,0.08));
+  padding:14px;
+  border-radius:8px;
+}
+
+/* títulos y texto */
+.about-body h3{margin:0 0 6px;font-size:18px}
+.about-body p{margin:0;color:rgba(255,255,255,0.95);font-size:14px;line-height:1.4}
+
+/* Controles y dots (mantener visibles sobre el overlay) */
+.about-controls{position:absolute;top:50%;left:0;right:0;display:flex;justify-content:space-between;transform:translateY(-50%);pointer-events:none;z-index:4}
+.about-controls button{pointer-events:auto;background:rgba(255,255,255,0.9);border:0;padding:8px;border-radius:8px;margin:0 12px;box-shadow:0 6px 18px rgba(20,30,60,0.06)}
+.about-dots{display:flex;gap:8px;justify-content:center;margin-top:12px;z-index:4;position:relative}
+
+/* responsive: slide más alto en desktop, menos en móvil */
+@media (min-width:1000px){ .about-slide{height:420px} }
+@media (max-width:800px){
+  .about-slide{height:300px}
+  .about-body{left:12px;right:12px;bottom:12px;padding:12px}
+  .about-body h3{font-size:16px}
+  .about-body p{font-size:13px}
+}
+
+</style>
+
+<script>
+// Script ligero para controlar el carrusel de "Sobre nosotros"
+(function(){
+  const carousel = document.getElementById('about-carousel');
+  if(!carousel) return;
+  const track = carousel.querySelector('.about-track');
+  const slides = Array.from(track.children);
+  const prev = carousel.querySelector('.about-prev');
+  const next = carousel.querySelector('.about-next');
+  const dots = Array.from(carousel.querySelectorAll('.about-dot'));
+  let index = 0;
+  const autoplay = carousel.dataset.autoplay === 'true';
+  const interval = parseInt(carousel.dataset.interval || 6000, 10);
+  let timer = null;
+  function update(){
+    const w = carousel.clientWidth;
+    track.style.transform = `translateX(-${index * w}px)`;
+    dots.forEach((d,i)=> d.classList.toggle('active', i===index));
+  }
+  function go(i){ index = (i + slides.length) % slides.length; update(); }
+  function nextSlide(){ go(index + 1); }
+  function prevSlide(){ go(index - 1); }
+  if(next) next.addEventListener('click', ()=>{ nextSlide(); resetTimer(); });
+  if(prev) prev.addEventListener('click', ()=>{ prevSlide(); resetTimer(); });
+  dots.forEach((d,i)=> d.addEventListener('click', ()=>{ go(i); resetTimer(); }));
+  window.addEventListener('resize', update);
+  function startTimer(){ if(autoplay){ stopTimer(); timer = setInterval(()=> nextSlide(), interval); } }
+  function stopTimer(){ if(timer){ clearInterval(timer); timer = null; } }
+  function resetTimer(){ stopTimer(); startTimer(); }
+  carousel.addEventListener('mouseenter', stopTimer);
+  carousel.addEventListener('mouseleave', startTimer);
+  // Touch (swipe)
+  let startX = 0, moveX = 0, touching = false;
+  carousel.addEventListener('touchstart', (e)=>{ touching = true; startX = e.touches[0].clientX; }, {passive:true});
+  carousel.addEventListener('touchmove', (e)=>{ if(!touching) return; moveX = e.touches[0].clientX - startX; }, {passive:true});
+  carousel.addEventListener('touchend', ()=>{ if(!touching) return; if(Math.abs(moveX) > 50){ if(moveX < 0) nextSlide(); else prevSlide(); } startX=0;moveX=0;touching=false; resetTimer(); });
+  // Keyboard navigation
+  carousel.tabIndex = 0;
+  carousel.addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight'){ nextSlide(); resetTimer(); } if(e.key==='ArrowLeft'){ prevSlide(); resetTimer(); } });
+
+  // Inicial
+  update();
+  startTimer();
+})();
+</script>
+
     <section class="hero">
       <div class="card">
         <div class="stack">
@@ -223,6 +430,36 @@
       </ul>
     </div>
   </div>
+      <aside class="card">
+         <!-- Logo para desktop (queda justo arriba del contacto rápido) -->
+    <img src="img/logoju.png" alt="Logo Estudio Jurídico" class="logo-desktop">
+  <h3>Contacto rápido</h3>
+  <p class="muted">
+    <strong>Dra. Flavia Gimenez Singh</strong> Tel: +54 9 381 415-6766<br>
+    <strong>Dra. Liliana Aquino</strong> Tel: +54 9 11 5808-4238<br>
+    <strong>Dr. Gustavo Ramón Cejas</strong> Tel: +54 9 11 3152-0762<br>
+    Email: dralilianaaquino@gmail.com
+  </p>
+  <hr style="margin:12px 0;border:none;border-top:1px solid #eef2f8">
+  <div>
+    <strong>Horario</strong>
+    <p class="muted" style="margin:6px 0">Lunes a Viernes — 9:00 a 18:00</p>
+  </div>
+
+  <!-- Botón WhatsApp -->
+  <div style="margin-top:15px">
+    <a href="https://wa.me/5491158084238" target="_blank" 
+       style="display:inline-flex;align-items:center;gap:8px;
+              background:#25D366;color:white;padding:10px 14px;
+              border-radius:8px;text-decoration:none;font-weight:600">
+      <i class="fab fa-whatsapp" style="font-size:20px"></i> 
+      Chatear por WhatsApp
+    </a>
+  </div>
+</aside>
+    </section >
+    <section class="hero">
+      
   </section>
     
 
@@ -733,6 +970,88 @@
 
 <script>
 (function(){
+    // Menu toggle (móvil)
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navList = document.getElementById('nav-list');
+    if(menuToggle){
+      menuToggle.addEventListener('click', function(e){
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!expanded));
+        if(!expanded){
+          mobileMenu.hidden = false;
+          mobileMenu.style.display = 'block';
+          this.textContent = '✕';
+        } else {
+          mobileMenu.hidden = true;
+          mobileMenu.style.display = 'none';
+          this.textContent = '☰';
+        }
+      });
+
+      // Cerrar al hacer click fuera
+      document.addEventListener('click', function(ev){
+        if(!menuToggle.contains(ev.target) && !mobileMenu.contains(ev.target)){
+          menuToggle.setAttribute('aria-expanded','false');
+          mobileMenu.hidden = true;
+          mobileMenu.style.display = 'none';
+          menuToggle.textContent = '☰';
+        }
+      });
+
+      // Ajustar visibilidad al redimensionar
+      window.addEventListener('resize', function(){
+        if(window.innerWidth > 780){
+          mobileMenu.hidden = true;
+          mobileMenu.style.display = 'none';
+          menuToggle.setAttribute('aria-expanded','false');
+          menuToggle.style.display = 'none';
+          navList.style.display = 'flex';
+        } else {
+          menuToggle.style.display = 'inline-block';
+          navList.style.display = 'none';
+        }
+      });
+
+      // activar estado inicial según ancho
+      if(window.innerWidth <= 780){
+        menuToggle.style.display = 'inline-block';
+        navList.style.display = 'none';
+      } else {
+        menuToggle.style.display = 'none';
+        navList.style.display = 'flex';
+      }
+    }
+
+    // Traducción: mostrar/ocultar el widget alojado en #google_translate_element
+    const translateBtn = document.getElementById('translate-btn');
+    const gtEl = document.getElementById('google_translate_element');
+    if(translateBtn && gtEl){
+      translateBtn.addEventListener('click', function(e){
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!expanded));
+        if(!expanded){
+          gtEl.style.display = 'block';
+          // opcional: mover el widget inmediatamente debajo del botón para mejor UX
+          gtEl.style.position = 'absolute';
+          gtEl.style.top = (translateBtn.getBoundingClientRect().bottom + window.scrollY + 8) + 'px';
+          gtEl.style.right = '12px';
+        } else {
+          gtEl.style.display = 'none';
+        }
+      });
+
+      // si el script externo de Google Translate inyecta contenido, permitimos click dentro sin cerrar
+      document.addEventListener('click', function(ev){
+        if(!translateBtn.contains(ev.target) && !gtEl.contains(ev.target)){
+          translateBtn.setAttribute('aria-expanded','false');
+          gtEl.style.display = 'none';
+        }
+      });
+    }
+  })();
+
+(function(){
   // --- CONFIG: cambia solo el phone si quieres ---
   var phoneNumber = "5491158084238"; // <-- reemplaza si hace falta (formato internacional sin + ni espacios)
   var message = "Hola! Quisiera información sobre sus servicios.";
@@ -835,6 +1154,10 @@
 </style>
 </body>
 </html>
+
+
+
+
 
 
 
