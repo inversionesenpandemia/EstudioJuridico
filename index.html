@@ -91,22 +91,31 @@
     .testimonial{display:flex;gap:12px;align-items:flex-start}
     .testimonial .avatar{width:64px;height:64px;border-radius:999px;object-fit:cover}
 
-    /* Mostrar toggle en pantallas pequeñas y adaptar layout */
-  @media (max-width: 780px) {
-    .container.topbar { display:flex;align-items:center;gap:10px;flex-wrap:nowrap; }
-    .brand { flex: 1 1 auto; }
-    /* ocultar la nav horizontal y mostrar el toggle */
-    #nav-list { display:none !important; }
-    .menu-toggle { display:inline-block !important; }
-    /* mobile menu: ocupa ancho reducido y se posiciona debajo del header */
-    #mobile-menu { right:12px; left:auto; width:260px; }
-    /* make translate button smaller on mobile */
-    .translate-btn { padding:6px 8px;font-size:14px }
-    .brand-logo { width:48px; }
+    /* Toggle & mobile menu styles */
+.menu-toggle { display: none; z-index: 9999; background:transparent; border:0; color:inherit; cursor:pointer; }
+
+/* estilo móvil: mostrar toggle y ocultar nav horizontal */
+@media (max-width: 780px) {
+  .menu-toggle { display: inline-block; }
+  #nav-list { display: none !important; }
+  .mobile-menu {
+    position: absolute;
+    top: 66px; /* ajusta según alto del header */
+    right: 12px;
+    width: 260px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    z-index: 9998;
   }
-  @media (min-width: 781px) {
-    #mobile-menu { display:none !important; }
-  }
+  .mobile-menu[hidden] { display: none !important; }
+}
+
+/* Desktop: asegurar nav horizontal visible */
+@media (min-width: 781px){
+  .mobile-menu { display: none !important; }
+  #nav-list { display: flex !important; }
+}
   </style>
   <!-- Agregar esto en el <head> de tu página -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -128,7 +137,7 @@
   <div class="brand" style="display:flex;align-items:center;gap:12px;">
     <!-- Logo: reemplaza la ruta por tu logo (SVG/PNG). -->
     <a href="index.html" class="brand-logo-link" aria-label="Inicio - Estudio Integral">
-      <img src="img/logoju.png" alt="Estudio Integral Aquino & Asociados" class="brand-logo" style="width:56px;height:auto;border-radius:6px;display:block;">
+      <img src="/img/logoju.png" alt="Estudio Integral Aquino & Asociados" class="brand-logo" style="width:56px;height:auto;border-radius:6px;display:block;">
     </a>
 
     <div>
@@ -150,30 +159,30 @@
   </div>
 
   <!-- Navegación: lista semántica para mejor accesibilidad -->
-  <nav id="main-nav" aria-label="Menú principal" style="margin-left:12px;">
-    <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" type="button" style="display:none;background:transparent;border:none;color:white;font-weight:700;font-size:20px;padding:6px 8px">☰</button>
+  <nav id="main-nav" aria-label="Menú principal" style="margin-left:12px;position:relative;">
+  <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" type="button" style="background:transparent;border:none;color:white;font-weight:700;font-size:20px;padding:6px 8px">☰</button>
 
-    <ul id="nav-list" class="nav-list" style="display:flex;gap:16px;list-style:none;margin:0;padding:0;align-items:center">
-      <li><a href="#servicios" style="color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600">Servicios</a></li>
-      <li><a href="#abogados" style="color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600">Abogados</a></li>
-      <li><a href="#galeria" style="color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600">Galería</a></li>
-      <li><a href="#opiniones" style="color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600">Opiniones</a></li>
-      <li><a href="#pagos" style="color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600">Pagos</a></li>
-      <li><a href="#contacto" class="cta" style="background:white;color:var(--accent);padding:8px 12px;border-radius:10px;font-weight:700;text-decoration:none">Contacto</a></li>
+  <ul id="nav-list" class="nav-list" style="display:flex;gap:16px;list-style:none;margin:0;padding:0;align-items:center">
+    <li><a href="#servicios" style="color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600">Servicios</a></li>
+    <li><a href="#abogados" style="color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600">Abogados</a></li>
+    <li><a href="#galeria" style="color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600">Galería</a></li>
+    <li><a href="#opiniones" style="color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600">Opiniones</a></li>
+    <li><a href="#pagos" style="color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600">Pagos</a></li>
+    <li><a href="#contacto" class="cta" style="background:white;color:var(--accent);padding:8px 12px;border-radius:10px;font-weight:700;text-decoration:none">Contacto</a></li>
+  </ul>
+
+  <!-- menú móvil -->
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    <ul style="list-style:none;margin:0;padding:10px;display:flex;flex-direction:column;gap:6px;">
+      <li><a href="#servicios" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block">Servicios</a></li>
+      <li><a href="#abogados" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block">Abogados</a></li>
+      <li><a href="#galeria" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block">Galería</a></li>
+      <li><a href="#opiniones" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block">Opiniones</a></li>
+      <li><a href="#pagos" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block">Pagos</a></li>
+      <li><a href="#contacto" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block;font-weight:700">Contacto</a></li>
     </ul>
-
-    <!-- versión móvil: menú desplegable (oculto por defecto) -->
-    <div id="mobile-menu" class="mobile-menu" hidden style="display:none;position:absolute;top:68px;right:20px;background:white;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.12);overflow:hidden">
-      <ul style="list-style:none;margin:0;padding:10px;display:flex;flex-direction:column;gap:6px;">
-        <li><a href="#servicios" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block">Servicios</a></li>
-        <li><a href="#abogados" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block">Abogados</a></li>
-        <li><a href="#galeria" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block">Galería</a></li>
-        <li><a href="#opiniones" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block">Opiniones</a></li>
-        <li><a href="#pagos" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block">Pagos</a></li>
-        <li><a href="#contacto" style="color:var(--dark);text-decoration:none;padding:8px 12px;display:block;font-weight:700">Contacto</a></li>
-      </ul>
-    </div>
-  </nav>
+  </div>
+</nav>
 </div>
   </header>
 
@@ -970,86 +979,96 @@
 
 <script>
 (function(){
-    // Menu toggle (móvil)
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navList = document.getElementById('nav-list');
-    if(menuToggle){
-      menuToggle.addEventListener('click', function(e){
-        const expanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', String(!expanded));
-        if(!expanded){
-          mobileMenu.hidden = false;
-          mobileMenu.style.display = 'block';
-          this.textContent = '✕';
-        } else {
-          mobileMenu.hidden = true;
-          mobileMenu.style.display = 'none';
-          this.textContent = '☰';
-        }
-      });
+  // Selectores: ajustá si tus IDs/clases son diferentes
+  const menuToggle = document.querySelector('.menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const navList = document.getElementById('nav-list');
 
-      // Cerrar al hacer click fuera
-      document.addEventListener('click', function(ev){
-        if(!menuToggle.contains(ev.target) && !mobileMenu.contains(ev.target)){
-          menuToggle.setAttribute('aria-expanded','false');
-          mobileMenu.hidden = true;
-          mobileMenu.style.display = 'none';
-          menuToggle.textContent = '☰';
-        }
-      });
+  // Verificaciones iniciales: si falta algo, salir sin errores
+  if(!menuToggle){
+    console.warn('[menu] No se encontró .menu-toggle. Script de menú cancelado.');
+    return;
+  }
+  if(!navList){
+    console.warn('[menu] No se encontró #nav-list. Algunas funciones estarán limitadas.');
+  }
+  if(!mobileMenu){
+    console.warn('[menu] No se encontró #mobile-menu. El menú móvil no funcionará.');
+  }
 
-      // Ajustar visibilidad al redimensionar
-      window.addEventListener('resize', function(){
-        if(window.innerWidth > 780){
-          mobileMenu.hidden = true;
-          mobileMenu.style.display = 'none';
-          menuToggle.setAttribute('aria-expanded','false');
-          menuToggle.style.display = 'none';
-          navList.style.display = 'flex';
-        } else {
-          menuToggle.style.display = 'inline-block';
-          navList.style.display = 'none';
-        }
-      });
+  // Helpers
+  function isMobileView(){ return window.innerWidth <= 780; }
 
-      // activar estado inicial según ancho
-      if(window.innerWidth <= 780){
-        menuToggle.style.display = 'inline-block';
-        navList.style.display = 'none';
-      } else {
-        menuToggle.style.display = 'none';
-        navList.style.display = 'flex';
-      }
+  function openMenu(){
+    if(!mobileMenu) return;
+    menuToggle.setAttribute('aria-expanded','true');
+    menuToggle.classList.add('is-open');
+    mobileMenu.hidden = false;
+    mobileMenu.style.display = 'block';
+  }
+  function closeMenu(){
+    if(!mobileMenu) return;
+    menuToggle.setAttribute('aria-expanded','false');
+    menuToggle.classList.remove('is-open');
+    mobileMenu.hidden = true;
+    mobileMenu.style.display = 'none';
+  }
+  function toggleMenu(){
+    if(!mobileMenu) return;
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    if(expanded) closeMenu();
+    else openMenu();
+  }
+
+  // Click en el toggle
+  menuToggle.addEventListener('click', function(e){
+    e.stopPropagation();
+    toggleMenu();
+  });
+
+  // Click fuera: solo si existe mobileMenu y estamos en móvil
+  document.addEventListener('click', function(ev){
+    if(!mobileMenu) return;
+    if(!isMobileView()) return;
+    // si click dentro del toggle o dentro del menu, no cerrar
+    if(menuToggle.contains(ev.target) || mobileMenu.contains(ev.target)) return;
+    closeMenu();
+  });
+
+  // Cerrar con Escape
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && mobileMenu && !mobileMenu.hidden){
+      closeMenu();
     }
+  });
 
-    // Traducción: mostrar/ocultar el widget alojado en #google_translate_element
-    const translateBtn = document.getElementById('translate-btn');
-    const gtEl = document.getElementById('google_translate_element');
-    if(translateBtn && gtEl){
-      translateBtn.addEventListener('click', function(e){
-        const expanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', String(!expanded));
-        if(!expanded){
-          gtEl.style.display = 'block';
-          // opcional: mover el widget inmediatamente debajo del botón para mejor UX
-          gtEl.style.position = 'absolute';
-          gtEl.style.top = (translateBtn.getBoundingClientRect().bottom + window.scrollY + 8) + 'px';
-          gtEl.style.right = '12px';
-        } else {
-          gtEl.style.display = 'none';
-        }
-      });
-
-      // si el script externo de Google Translate inyecta contenido, permitimos click dentro sin cerrar
-      document.addEventListener('click', function(ev){
-        if(!translateBtn.contains(ev.target) && !gtEl.contains(ev.target)){
-          translateBtn.setAttribute('aria-expanded','false');
-          gtEl.style.display = 'none';
-        }
-      });
+  // Ajustes iniciales de visibilidad y al resize (debounced)
+  function applyView(){
+    if(isMobileView()){
+      menuToggle.style.display = 'inline-block';
+      if(navList) navList.style.display = 'none';
+      // mobileMenu stays hidden until user opens it
+      if(mobileMenu) { mobileMenu.hidden = true; mobileMenu.style.display = 'none'; }
+      menuToggle.setAttribute('aria-expanded','false');
+    } else {
+      menuToggle.style.display = 'none';
+      if(navList) navList.style.display = 'flex';
+      if(mobileMenu){ mobileMenu.hidden = true; mobileMenu.style.display = 'none'; }
+      menuToggle.setAttribute('aria-expanded','false');
+      menuToggle.classList.remove('is-open');
     }
-  })();
+  }
+
+  let resizeTimer = null;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(applyView, 120);
+  });
+
+  // Inicializar
+  applyView();
+
+})();
 
 (function(){
   // --- CONFIG: cambia solo el phone si quieres ---
@@ -1154,6 +1173,10 @@
 </style>
 </body>
 </html>
+
+
+
+
 
 
 
