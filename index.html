@@ -113,6 +113,44 @@
   .mobile-menu { display: none !important; }
   #nav-list { display: flex !important; }
 }
+    /* Desktop: asegurar nav horizontal visible */
+@media (min-width: 781px){
+  .mobile-menu { display: none !important; }
+  #nav-list { display: flex !important; }
+}
+
+@media (max-width: 780px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .brand {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .translate-toggle-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .translate-btn {
+    width: fit-content;
+  }
+
+  .menu-toggle {
+    align-self: flex-start;
+  }
+
+  nav {
+    width: 100%;
+  }
+}
   </style>
   <!-- Agregar esto en el <head> de tu página -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -144,17 +182,15 @@
     </div>
   </div>
 
-  <!-- Botón de traducción: contiene el widget de Google Translate (elemento original) -->
-  <div style="display:flex;align-items:center;gap:12px">
-    <button id="translate-btn" class="translate-btn" aria-expanded="false" aria-controls="google_translate_element" type="button" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.12);color:white;padding:8px 10px;border-radius:10px;cursor:pointer;font-weight:600">
-      <span aria-hidden style="font-size:16px">🌐</span>
-      <span class="translate-label">Idioma</span>
-    </button>
+  <!-- Botón de traducción y toggle agrupados para móviles -->
+<div class="translate-toggle-wrapper">
+  <button id="translate-btn" class="translate-btn" aria-expanded="false" aria-controls="google_translate_element" type="button" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.12);color:white;padding:8px 10px;border-radius:10px;cursor:pointer;font-weight:600">
+    <span aria-hidden style="font-size:16px">🌐</span>
+    <span class="translate-label">Idioma</span>
+  </button>
 
-    <!-- Este div es el que ya usabas para Google Translate. Queda dentro del botón visualmente
-         pero lo mostramos/ocultamos con JS. Mantengo el id original para compatibilidad con tu script. -->
-    <div id="google_translate_element" style="display:none;position:absolute;z-index:9999"></div>
-  </div>
+  <div id="google_translate_element" style="display:none;position:absolute;z-index:9999"></div>
+</div>
 
   <!-- Navegación: lista semántica para mejor accesibilidad -->
   <nav id="main-nav" aria-label="Menú principal" style="margin-left:12px;position:relative;">
@@ -1394,6 +1430,7 @@
 </style>
 </body>
 </html>
+
 
 
 
