@@ -85,7 +85,6 @@
     .dot.active{background:var(--accent)}
     .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     .service-card{background:#fff;padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(20,30,60,0.04)}
-    .gallery-img{width:100%;height:260px;object-fit:cover;border-radius:10px}
     .testimonial{display:flex;gap:12px;align-items:flex-start}
     .testimonial .avatar{width:64px;height:64px;border-radius:999px;object-fit:cover}
 
@@ -805,21 +804,31 @@
 </script>
     
     <!-- ====== GALERÍA DEL LUGAR FÍSICO (nueva sección, agrega tus imágenes) ====== -->
-    <section id="galeria" style="margin-top:28px">
-      <h3>Nuestra oficina</h3>
-      <div class="card carousel" id="gallery-carousel" data-autoplay="true" data-interval="4500">
-        <div class="carousel-track">
-          <div class="carousel-slide"><img class="gallery-img" loading="lazy" src="img/estudio3.jpeg" alt="Recepción"></div>
-          <div class="carousel-slide"><img class="gallery-img" loading="lazy" src="img/estudio2.jpeg" alt="Sala de reuniones"></div>
-          <div class="carousel-slide"><img class="gallery-img" loading="lazy" src="img/estudio1.jpeg" alt="Fachada"></div>
-        </div>
-        <div class="carousel-controls">
-          <button class="prev" aria-label="Anterior">◀</button>
-          <button class="next" aria-label="Siguiente">▶</button>
-        </div>
-        <div class="carousel-dots"><button class="dot active" data-index="0"></button><button class="dot" data-index="1"></button><button class="dot" data-index="2"></button></div>
+   <section id="galeria" style="margin-top:28px">
+  <h3>Nuestra oficina</h3>
+  <div class="card carousel" id="gallery-carousel" data-autoplay="true" data-interval="4500" style="position:relative; overflow:hidden; width:100%; max-width:800px; margin:auto;">
+    <div class="carousel-track" style="display:flex; transition:transform 0.5s ease; width:100%;">
+      <div class="carousel-slide" style="flex:0 0 100%; height:100%;">
+        <img class="gallery-img" loading="lazy" src="img/estudio3.jpeg" alt="Recepción" style="width:100%; height:100%; object-fit:cover; display:block;">
       </div>
-    </section>
+      <div class="carousel-slide" style="flex:0 0 100%; height:100%;">
+        <img class="gallery-img" loading="lazy" src="img/estudio2.jpeg" alt="Sala de reuniones" style="width:100%; height:100%; object-fit:cover; display:block;">
+      </div>
+      <div class="carousel-slide" style="flex:0 0 100%; height:100%;">
+        <img class="gallery-img" loading="lazy" src="img/estudio1.jpeg" alt="Fachada" style="width:100%; height:100%; object-fit:cover; display:block;">
+      </div>
+    </div>
+    <div class="carousel-controls" style="position:absolute; top:50%; left:0; right:0; display:flex; justify-content:space-between; transform:translateY(-50%);">
+      <button class="prev" aria-label="Anterior">◀</button>
+      <button class="next" aria-label="Siguiente">▶</button>
+    </div>
+    <div class="carousel-dots" style="text-align:center; margin-top:10px;">
+      <button class="dot active" data-index="0"></button>
+      <button class="dot" data-index="1"></button>
+      <button class="dot" data-index="2"></button>
+    </div>
+  </div>
+</section>
 
     <!-- ====== OPINIONES (nueva sección de testimonios) ====== -->
     <section id="opiniones" style="margin-top:28px">
@@ -1385,6 +1394,7 @@
 </style>
 </body>
 </html>
+
 
 
 
