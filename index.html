@@ -1,4 +1,3 @@
-
 <!-- index.html (modificado sobre tu código original; paga y scripts conservados) -->
 <!doctype html>
 <html lang="es">
@@ -9,10 +8,10 @@
   <meta name="description" content="Estudio jurídico. Atención en causas civiles, penales, laborales y tramites migratorios.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    :root{--accent:#0b5cff;--dark:#0b1b2b;--muted:#6b7280;--card-bg:#ffffff;--radius:12px;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color-scheme:light}
+    :root{--accent:#6fad52;--dark:#0b1b2b;--muted:#6b7280;--card-bg:#ffffff;--radius:12px;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color-scheme:light}
     *{box-sizing:border-box}
     body{margin:0;background:#f6f8fb;color:var(--dark);line-height:1.45}
-    header{background:linear-gradient(90deg,var(--accent),#2b6ef6);color:white;padding:18px 20px}
+    header{background:linear-gradient(90deg,var(--accent),#26a055);color:white;padding:18px 20px}
     .container{max-width:1100px;margin:0 auto;padding:20px}
     .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
@@ -40,9 +39,9 @@
 
 /* En móviles mostrar el logo fijo y ocultar la versión dentro del aside si preferís */
 @media (max-width: 600px) {
-  .logo-desktop { display: none; }
+  .logo-desktop { display: block; }
   .logo-mobile { display: block; }
-  .logo-desktop1 { display: block; }
+
 }
 
     .card{background:var(--card-bg);border-radius:var(--radius);padding:18px;box-shadow:0 6px 18px rgba(20,30,60,0.06)}
@@ -118,6 +117,7 @@
   </style>
   <!-- Agregar esto en el <head> de tu página -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 <script type="text/javascript">
   function googleTranslateElementInit() {
     new google.translate.TranslateElement({
@@ -136,7 +136,7 @@
   <div class="brand" style="display:flex;align-items:center;gap:12px;">
     <!-- Logo: reemplaza la ruta por tu logo (SVG/PNG). -->
     <a href="index.html" class="brand-logo-link" aria-label="Inicio - Estudio Integral">
-      <img src="img/logoju.png" alt="Estudio Integral Aquino & Asociados" class="brand-logo" style="width:56px;height:auto;border-radius:6px;display:block;">
+      <img src="img/logoayc.png" alt="Estudio Integral Aquino & Asociados" class="brand-logo" style="width:56px;height:auto;border-radius:6px;display:block;">
     </a>
 
     <div>
@@ -359,6 +359,8 @@
 </style>
 
 <script>
+
+
 // Script ligero para controlar el carrusel de "Sobre nosotros"
 (function(){
   const carousel = document.getElementById('about-carousel');
@@ -440,13 +442,15 @@
   </div>
       <aside class="card">
          <!-- Logo para desktop (queda justo arriba del contacto rápido) -->
-    <img src="img/logoju.png" alt="Logo Estudio Jurídico" class="logo-desktop">
+    <img src="img/logoayc.png" alt="Logo Estudio Jurídico" class="logo-desktop">
   <h3>Contacto rápido</h3>
   <p class="muted">
-    <strong>Dra. Flavia Gimenez Singh</strong> Tel: +54 9 381 415-6766<br>
+    <strong>Dra. Flavia Gimenez Singh</strong> Tel: +54 9 381 415-6766<br> dra.gimenezflavia@gmail.com
+    <br>
     <strong>Dra. Liliana Aquino</strong> Tel: +54 9 11 5808-4238<br>
+    Email: dralilianaaquino@gmail.com<br>
     <strong>Dr. Gustavo Ramón Cejas</strong> Tel: +54 9 11 3152-0762<br>
-    Email: dralilianaaquino@gmail.com
+    
   </p>
   <hr style="margin:12px 0;border:none;border-top:1px solid #eef2f8">
   <div>
@@ -466,12 +470,6 @@
   </div>
 </aside>
     </section >
-    <section class="hero">
-      
-  </section>
-    
-
-
     <!-- ====== SERVICIOS (mantengo tu contenido pero lo envuelvo en un carrusel) ====== -->
     <section id="servicios">
   <h3>Servicios</h3>
@@ -534,31 +532,36 @@
       <div class="lawyers">
         <!-- Abogada 1 -->
         <div class="card lawyer" data-lawyer-id="1">
-          <img class="avatar" src="img/avatarmujer1.jpg" alt="Abogada Jubilaciones">
+          <img class="avatar" src="img/flavia.jpeg" alt="Abogada Jubilaciones">
           <h4>Dra. Flavia Gimenez Singh</h4>
           <div class="muted">M.P. 7494</div>
           <div class="muted">M.F. Tomo 144 Folio 813</div>
           <div class="muted">Especialista en jubilaciones y aportes previsionales</div>
           <p style="margin-top:10px">Asesoramiento en trámites previsionales, recursos administrativos y juicios previsionales.</p>
-          <div style="margin-top:10px"><span class="price">Precio consulta: $4.500</span></div>
+          <div style="margin-top:10px"><span class="price">Precio consulta: $25.000</span></div>
+          <div style="margin-top:5px">
+            <span class="usd-price" id="usd-price-1">Calculando precio en USD...</span>
+          </div>
           <div style="margin-top:10px;display:flex;gap:8px">
-            <!-- Cambio: al hacer clic redirige al perfil del abogado (plantilla profile.html) -->
-            <button class="consult-btn" data-lawyer="1" data-precio="4500" data-moneda="ARS" onclick="location.href='profile.html?lawyer=1'">Pedir consulta</button>
+            <button class="consult-btn" data-precio="4500" data-moneda="ARS" onclick="location.href='profile1.html'">Pedir consulta</button>
           </div>
         </div>
 
         <!-- Abogada 2 -->
         <div class="card lawyer" data-lawyer-id="2">
-          <img class="avatar" src="img/avatarmujer2.png" alt="Abogada Migraciones">
+          <img class="avatar" src="img/liliana.jpeg" alt="Abogada Migraciones">
           <h4>Dra. Liliana Aquino</h4>
           <div class="muted">Tomo 140 Folio 654 CPACF (CABA)</div>
           <div class="muted">M.P. 662 (Salta)</div>
           <div class="muted">M.F. Tomo 144 Folio 505</div>
           <div class="muted">Especialista en migraciones</div>
           <p style="margin-top:10px">Visas, residencia, apelaciones migratorias y asesoramiento a empresas.</p>
-          <div style="margin-top:10px"><span class="price">Precio consulta: $6.000</span></div>
+          <div style="margin-top:10px"><span class="price">Precio consulta: $25.000</span></div>
+          <div style="margin-top:5px">
+            <span class="usd-price" id="usd-price-2">Calculando precio en USD...</span>
+          </div>
           <div style="margin-top:10px;display:flex;gap:8px">
-            <button class="consult-btn" data-lawyer="2" onclick="location.href='profile.html?lawyer=2'">Pedir consulta</button>
+            <button class="consult-btn" data-precio="4500" data-moneda="ARS" onclick="location.href='profile2.html'">Pedir consulta</button>
           </div>
         </div>
 
@@ -570,65 +573,245 @@
           <div class="muted">M.F. Tomo 144 Folio 99</div>
           <div class="muted">Especialista en Civil (Familia) derecho laboral (ART, Daños y Perjuicios)</div>
           <p style="margin-top:10px">Despidos, demandas laborales, negociación y representación en juzgados.</p>
-          <div style="margin-top:10px"><span class="price">Precio consulta: $5.500</span></div>
+          <div style="margin-top:10px"><span class="price">Precio consulta: $25.000</span></div>
+          <div style="margin-top:5px">
+            <span class="usd-price" id="usd-price-3">Calculando precio en USD...</span>
+          </div>
           <div style="margin-top:10px;display:flex;gap:8px">
-            <button class="consult-btn" data-lawyer="3" onclick="location.href='profile.html?lawyer=3'">Pedir consulta</button>
+            <button class="consult-btn" data-precio="4500" data-moneda="ARS" onclick="location.href='profile3.html'">Pedir consulta</button>
           </div>
         </div>
       </div>
     </section>
+    <script>
+  // Tasa de cambio ARS → USD (actualizada al 13/10/2025)
+  const arsToUsdRate = 0.000742;
 
-    <!-- ====== SOLICITAR CONSULTA ====== -->
-<section id="consultas">
-  <h3>¿Querés invertir en Argentina?</h3>
-  <div class="card">
-    <p class="">
-      Nuestro estudio jurídico te brinda <strong>asesoramiento</strong> si querés invertir de forma rápida, segura y confiable.
-    </p>
-    <p class="">
-      Contamos con un equipo de profesionales especializados en distintas áreas del derecho, listos para ofrecerte una <strong>atención personalizada</strong>, con respuestas claras y adaptadas a tus necesidades.  
-      Nos comprometemos a brindarte un servicio transparente, ágil y con el respaldo de años de experiencia.
-    </p>
-    <section class="litio-info" style="padding:40px 20px;max-width:900px;margin:auto">
-  <h2>¿Por qué es rentable invertir en litio en Argentina?</h2>
-  <p>
-    Argentina forma parte del <strong>“Triángulo del Litio”</strong>, junto a Bolivia y Chile, que concentra el <strong>46% de las reservas mundiales</strong> de este mineral estratégico.
-  </p>
-  <ul>
-    <li>🔋 <strong>Demanda global en crecimiento</strong>: esencial para baterías de vehículos eléctricos y dispositivos electrónicos.</li>
-    <li>🌍 <strong>Transición energética</strong>: el mundo avanza hacia energías limpias, aumentando la necesidad de litio.</li>
-    <li>📉 <strong>Precios bajos como oportunidad</strong>: ideal para posicionarse a largo plazo.</li>
-    <li>🏗️ <strong>Infraestructura en expansión</strong>: provincias como Salta, Jujuy y Catamarca están desarrollando capacidades locales.</li>
-    <li>🤝 <strong>Apoyo institucional</strong>: informes como el de PwC destacan el potencial si se garantiza estabilidad jurídica y sostenibilidad.</li>
-  </ul>
+  // Recorremos cada tarjeta de abogado
+  document.querySelectorAll('.card.lawyer').forEach(card => {
+    const priceElement = card.querySelector('.price');
+    const usdElement = card.querySelector('.usd-price');
 
-  <hr style="margin:30px 0;border:none;border-top:1px solid #ccc">
+    if (priceElement && usdElement) {
+      // Extraer número desde el texto "$25.000"
+      const arsText = priceElement.textContent;
+      const arsValue = parseFloat(arsText.replace(/[^\d]/g, ''));
 
-  <h2>¿Qué es el litio y para qué sirve?</h2>
-  <p>
-    El litio es un <strong>metal alcalino blanco, muy ligero y altamente reactivo</strong>, extraído principalmente de <strong>salares de altura</strong> como los de la Puna argentina.
-  </p>
-  <h3>Usos principales del litio:</h3>
-  <ul>
-    <li>🔋 <strong>Baterías recargables</strong>: celulares, laptops, autos eléctricos y sistemas solares.</li>
-    <li>🧠 <strong>Psicofármacos</strong>: tratamiento de trastornos bipolares y estabilización del ánimo.</li>
-    <li>🛠️ <strong>Industria aeroespacial</strong>: aleaciones para aviones y trenes de alta velocidad.</li>
-    <li>🧼 <strong>Lubricantes y secantes</strong>: en sistemas industriales y de climatización.</li>
-    <li>🚀 <strong>Aplicaciones nucleares y espaciales</strong>: depurador de CO₂ en submarinos y naves espaciales.</li>
-  </ul>
+      // Calcular equivalente en USD
+      const usdValue = (arsValue * arsToUsdRate).toFixed(2);
+
+      // Mostrar resultado
+      usdElement.textContent = `≈ USD $${usdValue}`;
+    }
+  });
+</script>
+
+
+
+<!-- Carrusel "Sobre nosotros" -->
+<section class="carousel2-section">
+  <h2 style="text-align:center;">¿Querés invertir en Argentina?</h2>
+
+  <div id="carousel2" class="carousel2-container" data-autoplay="true" data-interval="6000">
+    <div class="carousel2-track">
+      <!-- 🖼️ Slides -->
+      <article class="carousel2-slide">
+        <img class="carousel2-img" src="img/litio0.png" alt="Soluciones legales">
+        <div class="carousel2-body">
+          <h3>Nuestro estudio jurídico te brinda asesoramiento si querés invertir de forma rápida, segura y confiable.</h3>
+          <p> Contamos con un equipo de profesionales especializados en distintas áreas del derecho, listos para ofrecerte una <strong>atención personalizada</strong>, con respuestas claras y adaptadas a tus necesidades.  
+          Nos comprometemos a brindarte un servicio transparente, ágil y con el respaldo de años de experiencia.</p>
+        </div>
+      </article>
+
+      <article class="carousel2-slide">
+        <img class="carousel2-img" src="img/litio1.png" alt="Inversiones extranjeras">
+        <div class="carousel2-body">
+          <h3>¿Por qué es rentable invertir en litio en Argentina?</h3>
+          <p>
+          Argentina forma parte del <strong>“Triángulo del Litio”</strong>, junto a Bolivia y Chile, que concentra el <strong>46% de las reservas mundiales</strong> de este mineral estratégico.
+        </p>
+        </div>
+      </article>
+
+      <article class="carousel2-slide">
+        <img class="carousel2-img" src="img/litio2.png" alt="Minería estratégica">
+        <div class="carousel2-body">
+          <h3>¿Qué es el litio y para qué sirve?</h3>
+          <p>
+          El litio es un <strong>metal alcalino blanco, muy ligero y altamente reactivo</strong>, extraído principalmente de <strong>salares de altura</strong> como los de la Puna argentina.
+        </p>
+        </div>
+      </article>
+
+      <article class="carousel2-slide">
+        <img class="carousel2-img" src="img/litio3.png" alt="Alianzas público-privadas">
+        <div class="carousel2-body">
+          <h3>Alianzas público-privadas</h3>
+          <p>Impulsamos modelos de cooperación para el desarrollo regional sostenible.</p>
+        </div>
+      </article>
+
+      <article class="carousel2-slide">
+        <img class="carousel2-img" src="img/litio4.png" alt="Confianza internacional">
+        <div class="carousel2-body">
+          <h3>Confianza internacional</h3>
+          <p>Somos el puente entre inversores globales y oportunidades locales.</p>
+        </div>
+      </article>
+    </div>
+
+    <!-- 🔄 Controles -->
+    <div class="carousel2-controls">
+      <button class="carousel2-prev" aria-label="Anterior">◀</button>
+      <button class="carousel2-next" aria-label="Siguiente">▶</button>
+    </div>
+
+    <!-- 🔘 Dots -->
+    <div class="carousel2-dots">
+      <button class="carousel2-dot active" data-index="0"></button>
+      <button class="carousel2-dot" data-index="1"></button>
+      <button class="carousel2-dot" data-index="2"></button>
+      <button class="carousel2-dot" data-index="3"></button>
+      <button class="carousel2-dot" data-index="4"></button>
+    </div>
+  </div>
 </section>
 
-</section>
+<style>
+    /* 🎨 Estilos únicos para este carrusel */
+    .carousel2-section {
+      margin-top: 20px;
+      font-family: sans-serif;
+    }
 
+    .carousel2-container {
+      position: relative;
+      overflow: hidden;
+      max-width: 800px;
+      margin: auto;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .carousel2-track {
+      display: flex;
+      transition: transform 0.5s ease;
+      width: 100%;
+    }
+
+    .carousel2-slide {
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .carousel2-img {
+      width: 100%;
+      max-height: 800px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .carousel2-img:hover {
+      transform: scale(1.05);
+    }
+
+    .carousel2-body h3 {
+      margin-top: 10px;
+      font-size: 1.2em;
+    }
+
+    .carousel2-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+
+    .carousel2-prev,
+    .carousel2-next {
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .carousel2-dots {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .carousel2-dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin: 0 5px;
+      border-radius: 50%;
+      background: #ccc;
+      border: none;
+      cursor: pointer;
+    }
+
+    .carousel2-dot.active {
+      background: #333;
+    }
+  </style>
+
+<script>
+  // 🎯 Script funcional para carrusel2
+  const track2 = document.querySelector('.carousel2-track');
+  const slides2 = document.querySelectorAll('.carousel2-slide');
+  const prevBtn2 = document.querySelector('.carousel2-prev');
+  const nextBtn2 = document.querySelector('.carousel2-next');
+  const dots2 = document.querySelectorAll('.carousel2-dot');
+
+  let index2 = 0;
+
+  function updateCarousel2(i) {
+    track2.style.transform = `translateX(-${i * 100}%)`;
+    dots2.forEach(dot => dot.classList.remove('active'));
+    if (dots2[i]) dots2[i].classList.add('active');
+  }
+
+  prevBtn2.addEventListener('click', () => {
+    index2 = (index2 - 1 + slides2.length) % slides2.length;
+    updateCarousel2(index2);
+  });
+
+  nextBtn2.addEventListener('click', () => {
+    index2 = (index2 + 1) % slides2.length;
+    updateCarousel2(index2);
+  });
+
+  dots2.forEach(dot => {
+    dot.addEventListener('click', () => {
+      index2 = parseInt(dot.dataset.index);
+      updateCarousel2(index2);
+    });
+  });
+
+  const carousel2 = document.getElementById('carousel2');
+  if (carousel2.dataset.autoplay === "true") {
+    setInterval(() => {
+      index2 = (index2 + 1) % slides2.length;
+      updateCarousel2(index2);
+    }, parseInt(carousel2.dataset.interval));
+  }
+</script>
     
     <!-- ====== GALERÍA DEL LUGAR FÍSICO (nueva sección, agrega tus imágenes) ====== -->
     <section id="galeria" style="margin-top:28px">
       <h3>Nuestra oficina</h3>
       <div class="card carousel" id="gallery-carousel" data-autoplay="true" data-interval="4500">
         <div class="carousel-track">
-          <div class="carousel-slide"><img class="gallery-img" loading="lazy" src="img/estudio.png" alt="Recepción"></div>
-          <div class="carousel-slide"><img class="gallery-img" loading="lazy" src="img/Oficinas.jpg" alt="Sala de reuniones"></div>
-          <div class="carousel-slide"><img class="gallery-img" loading="lazy" src="img/oficina.jpg" alt="Fachada"></div>
+          <div class="carousel-slide"><img class="gallery-img" loading="lazy" src="img/estudio3.jpeg" alt="Recepción"></div>
+          <div class="carousel-slide"><img class="gallery-img" loading="lazy" src="img/estudio2.jpeg" alt="Sala de reuniones"></div>
+          <div class="carousel-slide"><img class="gallery-img" loading="lazy" src="img/estudio1.jpeg" alt="Fachada"></div>
         </div>
         <div class="carousel-controls">
           <button class="prev" aria-label="Anterior">◀</button>
@@ -977,6 +1160,9 @@
 </style>
 
 <script>
+
+ 
+
 (function(){
   // Selectores: ajustá si tus IDs/clases son diferentes
   const menuToggle = document.querySelector('.menu-toggle');
@@ -1066,6 +1252,33 @@
 
   // Inicializar
   applyView();
+  
+  // Traducción: mostrar/ocultar el widget alojado en #google_translate_element
+    const translateBtn = document.getElementById('translate-btn');
+    const gtEl = document.getElementById('google_translate_element');
+    if(translateBtn && gtEl){
+      translateBtn.addEventListener('click', function(e){
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!expanded));
+        if(!expanded){
+          gtEl.style.display = 'block';
+          // opcional: mover el widget inmediatamente debajo del botón para mejor UX
+          gtEl.style.position = 'absolute';
+          gtEl.style.top = (translateBtn.getBoundingClientRect().bottom + window.scrollY + 8) + 'px';
+          gtEl.style.right = '12px';
+        } else {
+          gtEl.style.display = 'none';
+        }
+      });
+
+      // si el script externo de Google Translate inyecta contenido, permitimos click dentro sin cerrar
+      document.addEventListener('click', function(ev){
+        if(!translateBtn.contains(ev.target) && !gtEl.contains(ev.target)){
+          translateBtn.setAttribute('aria-expanded','false');
+          gtEl.style.display = 'none';
+        }
+      });
+    }
 
 })();
 
@@ -1172,6 +1385,7 @@
 </style>
 </body>
 </html>
+
 
 
 
