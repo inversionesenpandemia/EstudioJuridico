@@ -1,0 +1,133 @@
+
+<!-- profile.html (plantilla para perfil de abogado + formulario de solicitar consulta)
+     Subir junto a index.html. Llama a profile.html?lawyer=1 (o 2,3) -->
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perfil abogado — Solicitar consulta</title>
+  <style>
+    :root{--accent:#0b5cff;--dark:#0b1b2b;--muted:#6b7280;--card-bg:#ffffff;--radius:12px;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
+    body{margin:0;background:#f6f8fb;color:var(--dark)}
+    .container{max-width:900px;margin:0 auto;padding:20px}
+    .card{background:var(--card-bg);border-radius:var(--radius);padding:18px;box-shadow:0 6px 18px rgba(20,30,60,0.06)}
+    .avatar{width:100%;height:300px;object-fit:cover;border-radius:10px}
+    .muted{color:var(--muted)}
+    label{display:block;font-size:13px;margin-bottom:6px}
+    input,textarea,select{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px;margin-bottom:8px}
+    button{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+    @media(min-width:700px){ .layout{display:grid;grid-template-columns:1fr 360px;gap:18px} }
+    .consult-btn {
+  display: inline-block;
+  padding: 10px 16px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html">← Volver al inicio</a>
+
+    <div id="profile" class="card" style="margin-top:12px">
+      <!-- Aquí se inyecta dinamicamente el perfil -->
+      <img id="profile-avatar" class="avatar" src="img/liliana.jpg" alt="Foto abogado">
+      <h2 id="profile-name">Lic. Liliana Aquino</h2>
+      <div class="muted" id="profile-mp">Tomo 140 Folio 654 CPACF (CABA), M.P. 662 (Salta), M.F. Tomo 144 Folio 505</div>
+      <div class="muted" id="profile-specialty">Especialista en migraciones</div>
+      <p id="profile-bio" style="margin-top:10px">Visas, residencia, ciudadanía argentina, apelaciones migratorias y asesoramiento a empresas.</p>
+      <div style="margin-top:8px"><span id="profile-price" style="font-weight:800">Precio consulta: ARS $25.000</span></div>
+    <div style="margin-top:5px">
+        <span class="usd-price" id="usd-price-1">Calculando precio en USD...</span>
+    </div>
+
+    </div>
+
+    <div style="height:18px"></div>
+
+    <div class="card" id="booking" aria-labelledby="booking-title">
+      <h3 id="booking-title">Solicitar consulta con <span id="booking-name">Abogado</span></h3>
+
+      <!-- FORM: enviá a tu endpoint. Incluye lawyer_id oculto -->
+      <form id="booking-form" action="https://formsubmit.co/dralilianaaquino@gmail.com" method="POST">
+        <input type="hidden" name="lawyer_id" id="form-lawyer-id" value="">
+        <div>
+          <label for="name">Nombre completo</label>
+          <input id="name" name="name" type="text" required>
+        </div>
+        <div>
+          <label for="phone">Teléfono</label>
+          <input id="phone" name="phone" type="text">
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+        <div>
+          <label for="message">Resumen del caso</label>
+          <textarea id="message" name="message" maxlength="1200"></textarea>
+        </div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+          <button type="submit">Enviar solicitud</button>
+        </div>
+
+        <div id="form-msg" style="margin-top:10px;color:green;display:none"></div>
+      </form>
+    </div>
+    <!-- Sección Métodos de pago -->
+<section id="pagos" style="margin-top:24px">
+  <div class="card">
+    <h3>Métodos de pago</h3>
+    <p class="muted" style="margin-top:6px">
+      Elegí tu método de pago seguro. Una vez realizado, podrás enviar tu consulta 
+      y recibirás el enlace de Zoom por correo electrónico.
+    </p>
+
+    <div style="display:flex;gap:16px;margin-top:18px;flex-wrap:wrap;align-items:center">
+
+      <!-- BOTÓN MERCADO PAGO -->
+      <div style="margin-top:10px;display:flex;gap:8px">
+          <a href="https://mpago.la/2bJBzP1" target="_blank" class="consult-btn">Pagar con Mercado Pago</a>
+      </div>
+        
+
+      <!-- BOTÓN PAYPAL -->
+      <a href="" target="_blank" rel="noopener noreferrer"
+         style="display:inline-flex;align-items:center;gap:8px;
+                background:#ffc439;color:#111;font-weight:700;
+                padding:10px 16px;border-radius:8px;
+                text-decoration:none;transition:0.3s">
+        <span style="font-size:18px">🅿️</span> Pagar con PayPal
+      </a>
+    </div>
+
+    <div style="margin-top:12px;font-size:13px;color:var(--muted)">
+      ✅ Una vez confirmado el pago, podrás enviar tu consulta desde el formulario.
+    </div>
+  </div>
+</section>
+
+  </div>
+
+  <script>
+  // Cotización actual obtenida en tiempo real
+  const arsToUsdRate = 0.000742; // actualizado al 13/10/2025
+
+  // Precio en ARS
+  const precioARS = 25000;
+
+  // Cálculo
+  const precioUSD = (precioARS * arsToUsdRate).toFixed(2);
+
+  // Mostrar en el HTML
+  document.getElementById("usd-price-1").textContent = `≈ USD $${precioUSD}`;
+</script>
+
+</body>
+</html>
